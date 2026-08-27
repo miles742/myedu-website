@@ -1,0 +1,12 @@
+data/users.json
+data/users.json.tmp
+data/instructor-applications.json
+data/instructor-applications.json.tmp
+.env
+.env.local
+.env.*
+!.env.example
+.env
+.env.local
+.env.*
+!.env.example

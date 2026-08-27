@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="(주)마이에듀케이션 강사 지원 페이지입니다. 교육의 가능성을 함께 만들어갈 강사를 기다립니다.">
+    <title>강사 지원 | (주)마이에듀케이션</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&amp;family=Noto+Sans+KR:wght@400;500;600;700;800;900&amp;display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="instructor-apply.css">
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2" defer></script>
+    <script src="supabase-client.js" defer></script>
+    <script src="instructor-apply.js" defer></script>
+</head>
+<body class="instructor-page">
+    <a class="skip-link" href="#application-form">지원서 바로가기</a>
+
+    <header class="application-header">
+        <div class="container application-header-inner">
+            <a class="logo" href="index.html" aria-label="마이에듀케이션 홈페이지로 이동">
+                <img class="header-logo-image" src="images/logo-hd.png" alt="(주)마이에듀케이션">
+            </a>
+            <div class="application-header-actions">
+                <a class="application-back" href="index.html"><span aria-hidden="true">←</span> 홈페이지로 돌아가기</a>
+                <button class="auth-nav-button" id="application-auth-open" type="button">로그인</button>
+                <div class="user-menu" id="application-user-menu" hidden>
+                    <button class="user-menu-button" id="application-user-button" type="button" aria-expanded="false" aria-controls="application-user-panel">
+                        <span class="user-avatar" id="application-user-avatar" aria-hidden="true">M</span>
+                        <span id="application-user-name">회원</span>
+                    </button>
+                    <div class="user-menu-panel" id="application-user-panel" hidden>
+                        <span id="application-user-email"></span>
+                        <button id="application-logout" type="button">로그아웃</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main class="application-main">
+        <section class="application-hero" aria-labelledby="application-title">
+            <div class="application-hero-overlay" aria-hidden="true"></div>
+            <div class="container application-hero-grid">
+                <div class="application-hero-copy">
+                    <p class="application-eyebrow"><span>RECRUIT</span> INSTRUCTOR APPLICATION</p>
+                    <h1 id="application-title">배움의 가능성을<br>함께 키워갈 강사를<br>기다립니다.</h1>
+                    <p>마이에듀케이션은 대학·공공기관·지자체 교육 현장에서 참여자의 변화를 만들어갈 전문 강사와 함께합니다.</p>
+                    <a class="application-scroll" href="#application-form">지원서 작성하기 <span aria-hidden="true">↓</span></a>
+                </div>
+
+                <div class="application-highlights" aria-label="강사 모집 안내">
+                    <article><span>01</span><strong>다양한 교육 현장</strong><p>대학 어학 과정부터 청소년 영어캠프까지 폭넓은 프로젝트에 참여합니다.</p></article>
+                    <article><span>02</span><strong>전문적인 운영 지원</strong><p>교육 준비와 현장 운영을 담당 매니저가 체계적으로 지원합니다.</p></article>
+                    <article><span>03</span><strong>지속적인 파트너십</strong><p>강사의 전문성과 프로그램 성과를 바탕으로 다음 기회를 연결합니다.</p></article>
+                </div>
+            </div>
+        </section>
+
+        <section class="application-section" id="application-form" aria-labelledby="form-title">
+            <div class="container application-layout">
+                <aside class="application-guide">
+                    <p class="section-label"><span>PROCESS</span> HOW TO JOIN</p>
+                    <h2>지원부터 강의까지<br>이렇게 진행됩니다.</h2>
+                    <ol>
+                        <li><span>01</span><div><strong>지원서 접수</strong><p>경력과 활동 가능 정보를 작성해 주세요.</p></div></li>
+                        <li><span>02</span><div><strong>지원 내용 검토</strong><p>담당자가 지원 분야와 프로젝트 적합성을 확인합니다.</p></div></li>
+                        <li><span>03</span><div><strong>개별 인터뷰</strong><p>가능 일정과 강의 방식에 관해 이야기합니다.</p></div></li>
+                        <li><span>04</span><div><strong>프로젝트 매칭</strong><p>적합한 교육 일정이 확정되면 개별 안내드립니다.</p></div></li>
+                    </ol>
+                    <p class="application-guide-note">접수 후 영업일 기준 7일 이내에 검토하며, 프로젝트 상황에 따라 연락 시점이 달라질 수 있습니다.</p>
+                </aside>
+
+                <div class="application-form-card">
+                    <div class="application-form-heading">
+                        <p>INSTRUCTOR APPLICATION</p>
+                        <h2 id="form-title">강사 지원서</h2>
+                        <span><em>*</em> 표시는 필수 입력 항목입니다.</span>
+                    </div>
+
+                    <form id="instructor-application-form" novalidate>
+                        <fieldset>
+                            <legend>기본 정보</legend>
+                            <div class="application-form-grid">
+                                <label><span>이름 <em>*</em></span><input type="text" name="name" autocomplete="name" minlength="2" maxlength="30" required placeholder="성함을 입력해 주세요"></label>
+                                <label><span>연락처 <em>*</em></span><input type="tel" name="phone" autocomplete="tel" required placeholder="010-0000-0000"></label>
+                                <label class="form-wide"><span>이메일 <em>*</em></span><input type="email" name="email" autocomplete="email" maxlength="254" required placeholder="example@email.com"></label>
+                            </div>
+                        </fieldset>
+
+                        <fieldset>
+                            <legend>강의 및 활동 정보</legend>
+                            <div class="application-form-grid">
+                                <label><span>주요 지원 분야 <em>*</em></span><select name="field" required><option value="">선택해 주세요</option><option>TOEIC · TOEIC Speaking</option><option>OPIc · 회화</option><option>청소년 영어캠프</option><option>비즈니스 · 취업 영어</option><option>기타 외국어 및 교육 분야</option></select></label>
+                                <label><span>강의 경력 <em>*</em></span><span class="input-suffix"><input type="number" name="careerYears" min="0" max="60" step="1" required placeholder="0"><small>년</small></span></label>
+                                <label><span>활동 가능 지역 <em>*</em></span><input type="text" name="region" maxlength="80" required placeholder="예: 서울·경기, 충청권, 전국"></label>
+                                <label><span>활동 가능 일정 <em>*</em></span><input type="text" name="schedule" maxlength="120" required placeholder="예: 평일 오전·주말 가능"></label>
+                                <label class="form-wide"><span>이력서·포트폴리오 링크</span><input type="url" name="resumeUrl" maxlength="500" placeholder="공개 가능한 구글 드라이브·노션 링크"></label>
+                                <label class="form-wide"><span>자기소개 및 강의 경험 <em>*</em></span><textarea name="introduction" minlength="30" maxlength="2000" required placeholder="주요 강의 경험, 강의 철학, 지원 동기를 30자 이상 작성해 주세요."></textarea><small class="character-count"><b id="introduction-count">0</b> / 2,000자</small></label>
+                            </div>
+                        </fieldset>
+
+                        <label class="application-consent"><input type="checkbox" name="consent" required><span><strong>개인정보 수집 및 이용에 동의합니다. <em>*</em></strong><small>지원 검토와 연락을 위해 이름, 연락처, 이메일, 경력 정보를 수집하며 채용 절차 종료 후 관련 기준에 따라 안전하게 관리합니다.</small></span></label>
+
+                        <button class="application-submit" type="submit">강사 지원서 제출하기 <span aria-hidden="true">→</span></button>
+                        <p class="application-status" id="application-status" aria-live="polite"></p>
+                    </form>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <div class="auth-modal" id="application-auth-modal" hidden>
+        <div class="auth-backdrop" data-application-auth-close></div>
+        <section class="auth-dialog" role="dialog" aria-modal="true" aria-labelledby="application-auth-title">
+            <button class="auth-close" type="button" aria-label="로그인 창 닫기" data-application-auth-close></button>
+            <div class="auth-brand">
+                <span>MY EDUCATION</span>
+                <h2 id="application-auth-title">다시 만나 반가워요.</h2>
+                <p id="application-auth-description">로그인하고 강사 지원 서비스를 이용해 보세요.</p>
+            </div>
+            <div class="auth-tabs" role="tablist" aria-label="회원 인증">
+                <button class="active" id="application-login-tab" type="button" role="tab" aria-selected="true">로그인</button>
+                <button id="application-register-tab" type="button" role="tab" aria-selected="false">회원가입</button>
+            </div>
+            <form class="auth-form" id="application-login-form">
+                <label><span>이메일</span><input type="email" name="email" autocomplete="email" required placeholder="name@example.com"></label>
+                <label><span>비밀번호</span><input type="password" name="password" autocomplete="current-password" required minlength="8" placeholder="비밀번호를 입력해 주세요"></label>
+                <button class="auth-submit" type="submit">로그인</button>
+                <p class="auth-status" id="application-login-status" aria-live="polite"></p>
+            </form>
+            <form class="auth-form" id="application-register-form" hidden>
+                <label><span>이름</span><input type="text" name="name" autocomplete="name" required minlength="2" maxlength="30" placeholder="이름을 입력해 주세요"></label>
+                <label><span>이메일</span><input type="email" name="email" autocomplete="email" required placeholder="name@example.com"></label>
+                <label><span>비밀번호</span><input type="password" name="password" autocomplete="new-password" required minlength="8" maxlength="128" placeholder="8자 이상 입력해 주세요"></label>
+                <label><span>비밀번호 확인</span><input type="password" name="passwordConfirm" autocomplete="new-password" required minlength="8" maxlength="128" placeholder="비밀번호를 다시 입력해 주세요"></label>
+                <button class="auth-submit" type="submit">회원가입</button>
+                <p class="auth-status" id="application-register-status" aria-live="polite"></p>
+            </form>
+        </section>
+    </div>
+
+    <div class="auth-toast" id="application-auth-toast" role="status" aria-live="polite" hidden></div>
+
+    <footer class="footer">
+        <div class="container footer-inner">
+            <a class="logo footer-logo" href="index.html" aria-label="마이에듀케이션 홈페이지로 이동"><img class="footer-logo-image" src="images/logo-hd.png" alt="(주)마이에듀케이션"></a>
+            <div class="footer-content">
+                <nav class="footer-links" aria-label="하단 메뉴"><a href="index.html#about">회사소개</a><a href="index.html#business">사업분야</a><a href="index.html#portfolio">포트폴리오</a><a href="index.html#contact">고객센터</a><a href="instructor-apply.html">강사 지원</a></nav>
+                <div class="footer-details">
+                    <div class="footer-information">
+                        <p><span>(주)마이에듀케이션</span><span>대표이사 : 이희연</span><span>사업자등록번호 : 612-88-00456</span></p>
+                        <address><span class="footer-address-label">본사</span>서울특별시 마포구 월드컵로 196, 비105-씨26호(성산동)</address>
+                        <address><span class="footer-address-label">충남지사</span>충청남도 논산시 대학로 121, 318호 (건양대학교 글로컬 캠퍼스 건양회관 3층 318호)</address>
+                        <p><a href="mailto:Sally@my-edus.com">대표 이메일 : Sally@my-edus.com</a><a href="tel:01023002461">대표 연락처 : 010-2300-2461</a><span>FAX : 0504-050-5802</span></p>
+                    </div>
+                    <div class="footer-mobile"><img src="images/mobile-access-qr-current.svg" alt="모바일 홈페이지 접속 QR코드"><div><strong>MOBILE VIEW</strong><span>같은 Wi-Fi에서 접속하세요</span><a href="http://192.168.0.200:8000/">192.168.0.200:8000</a></div></div>
+                </div>
+                <div class="footer-bottom"><span>© 2026 MY EDUCATION CO., LTD. ALL RIGHTS RESERVED.</span><a href="#application-title">BACK TO TOP ↑</a></div>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
