@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="마이에듀케이션 이메일 인증 결과를 확인합니다.">
+    <title>이메일 인증 | 마이에듀케이션</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="auth-callback.css">
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2" defer></script>
+    <script src="supabase-client.js" defer></script>
+    <script src="auth-callback.js" defer></script>
+</head>
+<body>
+    <main class="auth-result">
+        <a class="auth-result-logo" href="index.html" aria-label="마이에듀케이션 홈으로 이동">
+            <img src="images/logo-hd.png" alt="(주)마이에듀케이션">
+        </a>
+        <section class="auth-result-card" aria-labelledby="auth-result-title">
+            <div class="auth-result-icon is-loading" id="auth-result-icon" aria-hidden="true">
+                <span></span>
+            </div>
+            <p class="auth-result-label">EMAIL VERIFICATION</p>
+            <h1 id="auth-result-title">이메일을 확인하고 있습니다.</h1>
+            <p id="auth-result-message" aria-live="polite">잠시만 기다려 주세요.</p>
+            <a class="auth-result-link" id="auth-result-link" href="index.html" hidden>홈으로 이동</a>
+        </section>
+    </main>
+</body>
+</html>

@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="마이에듀케이션 회원정보와 프로필 사진을 관리하는 마이페이지입니다.">
+    <title>마이페이지 | 마이에듀케이션</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;600;700;800;900&amp;display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="mypage.css">
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2" defer></script>
+    <script src="supabase-client.js" defer></script>
+    <script src="mypage.js" defer></script>
+</head>
+<body>
+    <a class="skip-link" href="#mypage-main">본문 바로가기</a>
+    <header class="mypage-header">
+        <div class="mypage-header-inner">
+            <a class="mypage-logo" href="index.html" aria-label="마이에듀케이션 홈으로 이동">
+                <img src="images/logo-hd.png" alt="(주)마이에듀케이션">
+            </a>
+            <div class="mypage-header-actions">
+                <a href="index.html">홈으로</a>
+                <button id="mypage-logout" type="button">로그아웃</button>
+            </div>
+        </div>
+    </header>
+
+    <main class="mypage-main" id="mypage-main">
+        <section class="mypage-intro" aria-labelledby="mypage-title">
+            <p>MY EDUCATION ACCOUNT</p>
+            <h1 id="mypage-title">마이페이지</h1>
+            <span>가입 정보와 프로필 사진을 확인하고 수정할 수 있습니다.</span>
+        </section>
+
+        <div class="mypage-layout" id="mypage-content" hidden>
+            <aside class="profile-photo-card" aria-labelledby="profile-photo-title">
+                <h2 id="profile-photo-title">프로필 사진</h2>
+                <div class="profile-photo" id="profile-photo">
+                    <img id="profile-photo-image" src="" alt="내 프로필 사진" hidden>
+                    <span id="profile-photo-fallback" aria-hidden="true">M</span>
+                </div>
+                <strong id="profile-photo-name">회원</strong>
+                <span id="profile-photo-email"></span>
+                <div class="profile-photo-actions">
+                    <label for="profile-photo-input">사진 선택</label>
+                    <input id="profile-photo-input" type="file" accept="image/jpeg,image/png,image/webp" hidden>
+                    <button id="profile-photo-remove" type="button" hidden>사진 삭제</button>
+                </div>
+                <p>JPG, PNG, WEBP · 최대 5MB</p>
+                <p class="profile-photo-status" id="profile-photo-status" aria-live="polite"></p>
+            </aside>
+
+            <section class="profile-info-card" aria-labelledby="profile-info-title">
+                <div class="profile-info-heading">
+                    <div>
+                        <p>PERSONAL INFORMATION</p>
+                        <h2 id="profile-info-title">회원정보</h2>
+                    </div>
+                    <span>가입일 <time id="profile-created-at">-</time></span>
+                </div>
+
+                <form id="profile-form">
+                    <label>
+                        <span>이름</span>
+                        <input type="text" name="name" autocomplete="name" required minlength="2" maxlength="30">
+                    </label>
+                    <label>
+                        <span>이메일</span>
+                        <input type="email" name="email" autocomplete="email" required maxlength="254">
+                        <small>이메일 변경 시 메일로 전송되는 변경 확인 절차를 완료해야 합니다.</small>
+                    </label>
+                    <label>
+                        <span>연락처</span>
+                        <input type="tel" name="phone" autocomplete="tel" maxlength="20" pattern="[0-9+()\-\s]{0,20}" placeholder="010-0000-0000">
+                    </label>
+                    <button class="profile-save" type="submit">변경사항 저장</button>
+                    <p class="profile-form-status" id="profile-form-status" aria-live="polite"></p>
+                </form>
+            </section>
+        </div>
+
+        <section class="mypage-loading" id="mypage-loading" aria-live="polite">
+            <span></span>
+            <p>회원정보를 불러오고 있습니다.</p>
+        </section>
+    </main>
+
+    <div class="mypage-toast" id="mypage-toast" role="status" aria-live="polite" hidden></div>
+</body>
+</html>

@@ -1,0 +1,124 @@
+:root {
+    color-scheme: light;
+    font-family: "Noto Sans KR", sans-serif;
+    color: #17233b;
+    background: #f3f7fb;
+}
+
+* { box-sizing: border-box; }
+
+body {
+    margin: 0;
+    min-height: 100vh;
+    background:
+        radial-gradient(circle at 12% 16%, rgba(34, 112, 180, .13), transparent 32rem),
+        radial-gradient(circle at 88% 84%, rgba(240, 158, 54, .13), transparent 28rem),
+        #f3f7fb;
+}
+
+.auth-result {
+    width: min(92%, 620px);
+    min-height: 100vh;
+    margin: 0 auto;
+    padding: 48px 0;
+    display: grid;
+    align-content: center;
+    gap: 28px;
+}
+
+.auth-result-logo {
+    justify-self: center;
+}
+
+.auth-result-logo img {
+    display: block;
+    width: min(220px, 58vw);
+    height: auto;
+}
+
+.auth-result-card {
+    padding: clamp(36px, 8vw, 64px) clamp(24px, 7vw, 58px);
+    text-align: center;
+    background: rgba(255, 255, 255, .95);
+    border: 1px solid rgba(24, 65, 105, .1);
+    border-radius: 28px;
+    box-shadow: 0 24px 70px rgba(28, 60, 91, .13);
+}
+
+.auth-result-icon {
+    width: 72px;
+    height: 72px;
+    margin: 0 auto 24px;
+    display: grid;
+    place-items: center;
+    border-radius: 50%;
+    background: #eaf3fb;
+    color: #1769aa;
+}
+
+.auth-result-icon.is-loading span {
+    width: 30px;
+    height: 30px;
+    border: 3px solid rgba(23, 105, 170, .2);
+    border-top-color: #1769aa;
+    border-radius: 50%;
+    animation: auth-spin .8s linear infinite;
+}
+
+.auth-result-icon.is-success::before {
+    content: "✓";
+    font-size: 38px;
+    font-weight: 800;
+}
+
+.auth-result-icon.is-error {
+    color: #b13b3b;
+    background: #fff0f0;
+}
+
+.auth-result-icon.is-error::before {
+    content: "!";
+    font-size: 38px;
+    font-weight: 800;
+}
+
+.auth-result-label {
+    margin: 0 0 8px;
+    color: #1769aa;
+    font-size: 12px;
+    font-weight: 800;
+    letter-spacing: .16em;
+}
+
+h1 {
+    margin: 0;
+    font-size: clamp(25px, 5vw, 36px);
+    line-height: 1.35;
+}
+
+#auth-result-message {
+    margin: 15px 0 0;
+    color: #647086;
+    line-height: 1.7;
+}
+
+.auth-result-link {
+    min-width: 180px;
+    margin-top: 28px;
+    padding: 14px 24px;
+    display: inline-flex;
+    justify-content: center;
+    color: #fff;
+    font-weight: 700;
+    text-decoration: none;
+    background: #1769aa;
+    border-radius: 999px;
+}
+
+.auth-result-link:hover { background: #0e548c; }
+
+@keyframes auth-spin { to { transform: rotate(360deg); } }
+
+@media (prefers-reduced-motion: reduce) {
+    .auth-result-icon.is-loading span { animation: none; }
+}

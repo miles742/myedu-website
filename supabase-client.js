@@ -17,11 +17,24 @@
         }
     });
 
+    function getAuthCallbackUrl(flow) {
+        const callbackUrl = new URL("auth-callback.html", window.location.href);
+        callbackUrl.searchParams.set("flow", flow);
+        return callbackUrl.href;
+    }
+
     function displayUser(user) {
         if (!user) return null;
         const email = user.email || "";
         const name = String(user.user_metadata?.name || email.split("@")[0] || "회원").trim();
-        return { id: user.id, name, email };
+        return {
+            id: user.id,
+            name,
+            email,
+            phone: String(user.user_metadata?.phone || "").trim(),
+            avatarUrl: String(user.user_metadata?.avatar_url || "").trim(),
+            createdAt: user.created_at || ""
+        };
     }
 
     function friendlyError(error, fallback = "요청을 처리하지 못했습니다. 잠시 후 다시 시도해 주세요.") {
@@ -43,11 +56,14 @@
         return displayUser(data.user);
     }
 
-    async function signUp(name, email, password) {
+    async function signUp(name, email, password, phone = "") {
         const { data, error } = await client.auth.signUp({
             email,
             password,
-            options: { data: { name } }
+            options: {
+                data: { name, phone: String(phone || "").trim() },
+                emailRedirectTo: getAuthCallbackUrl("signup")
+            }
         });
         if (error) throw friendlyError(error);
         return {
@@ -70,6 +86,59 @@
         return displayUser(data.user);
     }
 
+    async function updateProfile({ name, email, phone }) {
+        const normalizedName = String(name || "").trim();
+        const normalizedEmail = String(email || "").trim().toLowerCase();
+        const normalizedPhone = String(phone || "").trim();
+        const { data: currentData, error: currentError } = await client.auth.getUser();
+        if (currentError) throw friendlyError(currentError);
+        const currentUser = currentData.user;
+        const updates = {
+            data: { ...currentUser.user_metadata, name: normalizedName, phone: normalizedPhone }
+        };
+        if (normalizedEmail && normalizedEmail !== currentUser.email) updates.email = normalizedEmail;
+        const { data, error } = await client.auth.updateUser(updates, {
+            emailRedirectTo: getAuthCallbackUrl("email-change")
+        });
+        if (error) throw friendlyError(error, "회원정보를 수정하지 못했습니다.");
+        return {
+            user: displayUser(data.user),
+            needsEmailConfirmation: Boolean(updates.email)
+        };
+    }
+
+    async function uploadAvatar(file) {
+        const { data: currentData, error: currentError } = await client.auth.getUser();
+        if (currentError) throw friendlyError(currentError);
+        const path = `${currentData.user.id}/avatar`;
+        const { error: uploadError } = await client.storage.from("avatars").upload(path, file, {
+            upsert: true,
+            contentType: file.type,
+            cacheControl: "3600"
+        });
+        if (uploadError) throw friendlyError(uploadError, "프로필 사진을 업로드하지 못했습니다.");
+        const { data: publicData } = client.storage.from("avatars").getPublicUrl(path);
+        const avatarUrl = `${publicData.publicUrl}?v=${Date.now()}`;
+        const { data, error } = await client.auth.updateUser({
+            data: { ...currentData.user.user_metadata, avatar_url: avatarUrl }
+        });
+        if (error) throw friendlyError(error, "프로필 사진 정보를 저장하지 못했습니다.");
+        return displayUser(data.user);
+    }
+
+    async function removeAvatar() {
+        const { data: currentData, error: currentError } = await client.auth.getUser();
+        if (currentError) throw friendlyError(currentError);
+        const path = `${currentData.user.id}/avatar`;
+        const { error: removeError } = await client.storage.from("avatars").remove([path]);
+        if (removeError) throw friendlyError(removeError, "프로필 사진을 삭제하지 못했습니다.");
+        const { data, error } = await client.auth.updateUser({
+            data: { ...currentData.user.user_metadata, avatar_url: null }
+        });
+        if (error) throw friendlyError(error, "프로필 사진 정보를 수정하지 못했습니다.");
+        return displayUser(data.user);
+    }
+
     async function insert(table, values, fallback) {
         const { error } = await client.from(table).insert(values);
         if (error) {
@@ -87,6 +156,9 @@
         signUp,
         signOut,
         getCurrentUser,
+        updateProfile,
+        uploadAvatar,
+        removeAvatar,
         insertInquiry(values) {
             return insert("inquiries", values, "문의 내용을 접수하지 못했습니다.");
         },

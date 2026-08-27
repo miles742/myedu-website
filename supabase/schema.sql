@@ -1,5 +1,6 @@
 -- Supabase Dashboard > SQL Editor에서 이 파일 전체를 한 번 실행하세요.
--- 두 테이블은 웹사이트에서 INSERT만 가능하고, 조회/수정/삭제는 Dashboard에서만 가능합니다.
+-- 문의/지원 테이블, 회원가입 이벤트, 회원 프로필 사진 저장소를 설정합니다.
+-- 문의/지원 데이터는 웹사이트에서 INSERT만 가능하고, 조회/수정/삭제는 Dashboard에서만 가능합니다.
 
 create extension if not exists pgcrypto;
 
@@ -35,14 +36,25 @@ create table if not exists public.instructor_applications (
     created_at timestamptz not null default now()
 );
 
+-- Auth 회원 생성이 성공한 경우에만 한 행이 만들어집니다.
+-- 이 테이블의 INSERT Database Webhook이 환영메일 Edge Function을 호출합니다.
+create table if not exists public.member_signup_events (
+    user_id uuid primary key references auth.users(id) on delete cascade,
+    email text not null check (char_length(email) <= 254),
+    name text not null default '회원' check (char_length(name) between 1 and 100),
+    created_at timestamptz not null default now()
+);
+
 create index if not exists inquiries_created_at_idx on public.inquiries (created_at desc);
 create index if not exists instructor_applications_created_at_idx on public.instructor_applications (created_at desc);
 
 alter table public.inquiries enable row level security;
 alter table public.instructor_applications enable row level security;
+alter table public.member_signup_events enable row level security;
 
 revoke all on table public.inquiries from anon, authenticated;
 revoke all on table public.instructor_applications from anon, authenticated;
+revoke all on table public.member_signup_events from anon, authenticated;
 grant insert on table public.inquiries to anon, authenticated;
 grant insert on table public.instructor_applications to anon, authenticated;
 
@@ -65,3 +77,72 @@ drop policy if exists "Members can submit instructor applications" on public.ins
 create policy "Members can submit instructor applications"
 on public.instructor_applications for insert to authenticated
 with check ((select auth.uid()) = user_id and consent = true);
+
+-- 브라우저가 아닌 Auth 시스템만 회원가입 이벤트를 생성합니다.
+create or replace function public.handle_new_auth_user()
+returns trigger
+language plpgsql
+security definer
+set search_path = ''
+as $$
+begin
+    if new.email is not null then
+        insert into public.member_signup_events (user_id, email, name)
+        values (
+            new.id,
+            lower(new.email),
+            coalesce(nullif(trim(new.raw_user_meta_data ->> 'name'), ''), '회원')
+        )
+        on conflict (user_id) do nothing;
+    end if;
+    return new;
+end;
+$$;
+
+revoke all on function public.handle_new_auth_user() from public, anon, authenticated;
+
+drop trigger if exists on_auth_user_created_send_welcome on auth.users;
+create trigger on_auth_user_created_send_welcome
+after insert on auth.users
+for each row execute procedure public.handle_new_auth_user();
+
+-- 회원 프로필 사진용 공개 버킷입니다. 파일 수정과 삭제는 본인 폴더에서만 가능합니다.
+insert into storage.buckets (id, name, public, file_size_limit, allowed_mime_types)
+values ('avatars', 'avatars', true, 5242880, array['image/jpeg', 'image/png', 'image/webp'])
+on conflict (id) do update set
+    public = excluded.public,
+    file_size_limit = excluded.file_size_limit,
+    allowed_mime_types = excluded.allowed_mime_types;
+
+drop policy if exists "Avatar images are publicly readable" on storage.objects;
+create policy "Avatar images are publicly readable"
+on storage.objects for select to public
+using (bucket_id = 'avatars');
+
+drop policy if exists "Members can upload their avatar" on storage.objects;
+create policy "Members can upload their avatar"
+on storage.objects for insert to authenticated
+with check (
+    bucket_id = 'avatars'
+    and (storage.foldername(name))[1] = (select auth.uid())::text
+);
+
+drop policy if exists "Members can update their avatar" on storage.objects;
+create policy "Members can update their avatar"
+on storage.objects for update to authenticated
+using (
+    bucket_id = 'avatars'
+    and (storage.foldername(name))[1] = (select auth.uid())::text
+)
+with check (
+    bucket_id = 'avatars'
+    and (storage.foldername(name))[1] = (select auth.uid())::text
+);
+
+drop policy if exists "Members can delete their avatar" on storage.objects;
+create policy "Members can delete their avatar"
+on storage.objects for delete to authenticated
+using (
+    bucket_id = 'avatars'
+    and (storage.foldername(name))[1] = (select auth.uid())::text
+);

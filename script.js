@@ -529,7 +529,13 @@ const programDetails = {
         category: "GYERYONG CITY · ENGLISH CAMP",
         title: "계룡시 영어캠프",
         image: "images/롸.jpg",
-        imageAlt: "계룡시 영어캠프 활동 현장",
+        imageAlt: "계룡시 청소년 영어캠프 단체사진",
+        imageSecondary: "images/계룡시 영어캠프 간식.jpg",
+        imageSecondaryAlt: "계룡시 영어캠프 참가 학생들의 간식 시간",
+        imageTertiary: "images/계룡시 영어캠프 활동 1.jpg",
+        imageTertiaryAlt: "계룡시 영어캠프 참여형 말하기 활동",
+        imageQuaternary: "images/계룡시 영어캠프 활동 2.jpg",
+        imageQuaternaryAlt: "계룡시 영어캠프 창의 영어 활동",
         imageFit: "contain",
         summary: "계룡시 학생들이 영어를 즐겁고 자연스럽게 경험할 수 있도록 체험 활동과 의사소통 중심 수업을 결합해 운영하는 몰입형 영어캠프입니다.",
         audience: "계룡시 학생",
@@ -573,13 +579,128 @@ const programDetails = {
         audience: "국방대학교 교육생",
         format: "맞춤형 어학강좌",
         points: ["교육생의 수준과 목표를 고려한 강좌 구성", "실용적인 언어 활용 중심의 단계별 학습", "안정적인 과정 운영과 체계적인 학습 지원"]
+    },
+    "staff-global-competency": {
+        index: "PROJECT 08",
+        category: "KONYANG UNIVERSITY · STAFF GLOBAL COMPETENCY",
+        title: "직원 국제화 역량강화 프로그램",
+        image: "images/4_대전 종강식 사진 (7).jpg",
+        imageAlt: "직원 국제화 역량강화 프로그램 참여자 기프트 전달 현장",
+        imageSecondary: "images/KakaoTalk_20260202_162528974_01.jpg",
+        imageSecondaryAlt: "건양대학교 직원 국제화 역량강화 프로그램 종강식",
+        summary: "대학기관 내 교직원의 국제화 역량과 실무 영어 활용 능력을 높이기 위해 운영하는 맞춤형 교육 프로그램입니다. 원어민 강사와 한국인 강사가 영어 회화와 TOEIC 수업을 진행하며, 참여자의 수준과 학습 목표에 맞춘 체계적인 교육을 제공합니다.",
+        audience: "대학기관 교직원",
+        format: "영어 회화·TOEIC 맞춤 교육",
+        points: ["원어민 강사와 함께하는 실용 영어 회화 수업", "한국인 전문 강사의 TOEIC 영역별 학습", "교직원의 수준과 업무 활용 목표를 반영한 과정 운영"]
+    },
+    "career-english-interview": {
+        index: "PROJECT 09",
+        category: "KONYANG UNIVERSITY · CAREER ENGLISH INTERVIEW",
+        title: "커리어역량강화 영어면접준비반",
+        image: "images/커리어역량강화 오리엔테이션.jpg",
+        imageAlt: "건양대학교 커리어역량강화 프로그램 오리엔테이션 현장",
+        imageSecondary: "images/KakaoTalk_20260205_030607790_14.jpg",
+        imageSecondaryAlt: "커리어역량강화 영어면접준비반 온라인 회화 수업",
+        imageTertiary: "images/3_원어민 시뮬레이션 사진(1).png",
+        imageTertiaryAlt: "원어민 강사와 진행한 영어면접 시뮬레이션",
+        imageQuaternary: "images/커리어역량강화 영어면접 수업.jpg",
+        imageQuaternaryAlt: "건양대학교 커리어역량강화 영어면접준비반 수업 현장",
+        summary: "해외 대학 어학연수나 해외 진출을 준비하는 학생들이 출국 전 현지 생활과 면접 상황에 필요한 실전 영어를 익히는 프로그램입니다. 원어민 강사와 전문 강사의 지도 아래 현지 회화, 영어 인터뷰, 상황별 의사소통을 반복 연습하며 해외 환경에 대한 적응력과 자신감을 높입니다.",
+        audience: "해외 어학연수·진출 준비 대학생",
+        format: "현지 회화·영어면접 실전 과정",
+        points: ["원어민 강사와 함께하는 현지 상황별 회화 연습", "실제 질문과 답변을 활용한 영어면접 시뮬레이션", "출국 전 실전 의사소통 역량과 자신감 강화"]
+    },
+    "australia-internship-conversation": {
+        index: "PROJECT 10",
+        category: "KONYANG UNIVERSITY · AUSTRALIA INTERNSHIP ENGLISH",
+        title: "호주 인턴쉽 회화 교육 프로그램",
+        image: "images/1_수업사진 (1).jpg",
+        imageAlt: "호주 인턴쉽 회화 교육 프로그램 단체 수업 현장",
+        imageSecondary: "images/호주 인턴십 종강식.jpg",
+        imageSecondaryAlt: "호주 인턴쉽 회화 교육 프로그램 수료증 수여 현장",
+        imageTertiary: "images/호주 인턴십 친목식사.jpg",
+        imageTertiaryAlt: "호주 인턴쉽 참가 학생 친목 식사 현장",
+        imageQuaternary: "images/호주 인턴십 회화수업.jpg",
+        imageQuaternaryAlt: "원어민 강사의 호주 인턴쉽 회화 개별 코칭 현장",
+        summary: "호주 인턴쉽을 준비하는 대학생이 출국 전 현지 생활과 업무 환경에서 필요한 전문 회화 역량을 집중적으로 익히도록 지원하는 단기 교육 프로그램입니다. 원어민 강사와 전문 강사의 실전 수업, 개별 코칭, 참여자 관리를 통해 현지 적응력과 의사소통 자신감을 높입니다.",
+        audience: "호주 인턴쉽 참가 예정 대학생",
+        format: "단기 집중 실전 회화·관리 과정",
+        points: ["호주 생활과 인턴 업무 상황을 반영한 실용 회화 교육", "원어민 강사의 실전 말하기 연습과 개별 피드백", "출국 전 학습 진도와 참여 상태를 고려한 체계적인 관리"]
+    },
+    "short-term-study-toeic-speaking": {
+        index: "PROJECT 11",
+        category: "KONYANG UNIVERSITY · SHORT-TERM STUDY ABROAD",
+        title: "해외대학 단기 어학연수 대비 실전 토익스피킹 역량 강화 프로그램",
+        image: "images/해외대학 단기연수 수업 1.jpg",
+        imageAlt: "해외대학 단기 어학연수 대비 실전 수업 현장",
+        imageSecondary: "images/해외대학 단기연수 수업 2.jpg",
+        imageSecondaryAlt: "해외대학 단기 어학연수 대비 소그룹 회화 수업",
+        imageTertiary: "images/해외대학 단기연수 수업 3.jpg",
+        imageTertiaryAlt: "원어민 강사의 실전 발음 및 회화 수업",
+        summary: "미국과 필리핀 등 해외 대학의 단기 어학연수를 준비하는 학생들이 방학 기간을 활용해 출국 전 실전 영어 역량을 집중적으로 강화하는 프로그램입니다. 원어민 강사와 전문 강사가 회화 수업, TOEIC Speaking 훈련, 상황별 실전 활동을 병행해 현지 수업과 생활에 원활하게 적응하도록 지원합니다.",
+        audience: "해외 단기 어학연수 예정 대학생",
+        format: "방학 집중 회화·TOEIC Speaking 과정",
+        points: ["원어민 강사와 함께하는 실전 발음 및 회화 훈련", "TOEIC Speaking 유형별 답변 구성과 말하기 연습", "해외 대학 수업과 현지 생활을 고려한 상황별 활동"]
+    },
+    "seocheon-youth-english-camp": {
+        index: "PROJECT 12",
+        category: "SEOCHEON COUNTY · YOUTH ENGLISH CAMP",
+        title: "서천군 영어캠프",
+        image: "images/서천군 영어캠프 수료식.jpg",
+        imageAlt: "서천군 청소년 영어캠프 발표회 및 수료식",
+        imageSecondary: "images/서천군 영어캠프 활동 1.jpg",
+        imageSecondaryAlt: "서천군 영어캠프 청소년 협업 프로젝트 활동",
+        imageTertiary: "images/서천군 영어캠프 활동 2.jpg",
+        imageTertiaryAlt: "서천군 영어캠프 창의 체험 활동",
+        imageQuaternary: "images/서천군 영어캠프 활동 3.jpg",
+        imageQuaternaryAlt: "서천군 영어캠프 학생 참여형 학습 활동",
+        summary: "서천군 지역 내 초등학생과 중학생이 학교 공간에서 일정 기간 함께 생활하고 학습하며 영어에 대한 자신감과 실력을 키우는 몰입형 청소년 캠프입니다. 영어 수업과 협업 프로젝트, 창의 체험 활동, 발표회를 연결해 학생들이 자연스럽게 소통하고 성취감을 경험하며 성장하도록 지원합니다.",
+        audience: "서천군 소재 초·중등 학생",
+        format: "학교 연계 몰입형 청소년 영어캠프",
+        points: ["영어 사용에 대한 부담을 낮추는 참여형 수업", "협업 프로젝트와 체험 활동을 통한 실전 의사소통", "발표회와 수료 과정을 통한 자신감 및 성취감 강화"]
+    },
+    "foreign-language-competency": {
+        index: "PROJECT 13",
+        category: "KONYANG UNIVERSITY · LANGUAGE COMPETENCY",
+        title: "외국어 활용 역량강화 교육",
+        image: "images/외국어 활용역량 토익중급반.png",
+        imageAlt: "건양대학교 프리미엄 TOEIC 중급 과정 단체사진",
+        imageSecondary: "images/외국어 활용역량 임상의약학과 토익반.jpg",
+        imageSecondaryAlt: "외국어 활용 역량강화 교육 임상의약학과 TOEIC반 단체사진",
+        imageTertiary: "images/외국어 활용역량 토익1반.jpg",
+        imageTertiaryAlt: "외국어 활용 역량강화 교육 TOEIC 1반 단체사진",
+        imageQuaternary: "images/외국어 활용역량 토익 수업.jpg",
+        imageQuaternaryAlt: "외국어 활용 역량강화 TOEIC 수업 현장",
+        imageQuinary: "images/외국어 활용역량 지텔프 수업.jpg",
+        imageQuinaryAlt: "외국어 활용 역량강화 G-TELP 수업 현장",
+        summary: "교내 학기 중 학생들의 외국어 활용 역량과 학습 자신감을 함께 높이기 위해 운영하는 맞춤형 어학 교육 프로그램입니다. TOEIC, TOEIC Speaking, G-TELP 등 학생들의 전공과 목표에 필요한 과정을 수준별로 구성하고, 실전 문제 풀이와 반복 훈련을 통해 구체적인 성취를 지원합니다.",
+        audience: "외국어 역량 향상을 원하는 대학생",
+        format: "학기 중 수준별 시험·실전 어학 과정",
+        points: ["TOEIC·TOEIC Speaking·G-TELP 과정별 맞춤 수업", "학과와 학습 수준을 고려한 반별 교육 운영", "반복적인 실전 훈련을 통한 성적 및 자신감 향상"]
+    },
+    "military-dys": {
+        index: "PROJECT 14",
+        category: "KONYANG UNIVERSITY · MILITARY DESIGN YOUR SPEC",
+        title: "군사 DYS",
+        image: "images/군사 DYS 수업 1.jpg",
+        imageAlt: "군사학과 신입생 군사 DYS TOEIC 수업 현장",
+        imageSecondary: "images/군사 DYS 수업 2.jpg",
+        imageSecondaryAlt: "군사 DYS 영어 역량강화 수업 현장",
+        imageTertiary: "images/군사 DYS 수업 3.jpg",
+        imageTertiaryAlt: "군사 DYS TOEIC 집중 학습 현장",
+        imageQuaternary: "images/군사 DYS 수업 4.jpg",
+        imageQuaternaryAlt: "군사 DYS 영어 회화 수업 현장",
+        summary: "군사 DYS는 국제 DYS와 별도로 군사학과 신입생을 위해 설계한 ‘Design Your Spec’ 프로그램입니다. 군사학과의 진로 특성과 학습 목표를 반영한 TOEIC 교육과 영어 회화 수업을 통해 신입생의 어학 역량, 의사소통 자신감, 향후 진로 경쟁력을 체계적으로 높입니다.",
+        audience: "군사학과 신입생",
+        format: "군사학과 맞춤 TOEIC·영어 회화 과정",
+        points: ["군사학과 신입생의 수준을 고려한 TOEIC 교육", "실용적인 의사소통 능력을 높이는 영어 회화 수업", "전공 진로와 어학 역량을 연결한 Design Your Spec 과정"]
     }
 };
 
 function selectProgramSlide(index) {
     const imageContainer = document.querySelector(".program-detail-image");
-    const images = [document.getElementById("program-image"), document.getElementById("program-image-secondary")];
-    const dots = [...(programImageDots?.querySelectorAll("[data-program-slide]") || [])];
+    const images = [...(imageContainer?.querySelectorAll(":scope > img[data-program-image]") || [])];
+    const dots = [...(programImageDots?.querySelectorAll("[data-program-slide]") || [])].filter((dot) => !dot.hidden);
     images.forEach((image, imageIndex) => {
         const isActive = imageIndex === index;
         image.classList.toggle("active", isActive);
@@ -598,7 +719,8 @@ function startProgramCarousel() {
     if (programImageDots?.hidden || reducedMotion.matches) return;
     programCarouselTimer = window.setInterval(() => {
         const imageContainer = document.querySelector(".program-detail-image");
-        const nextIndex = (Number(imageContainer?.dataset.activeSlide || 0) + 1) % 2;
+        const imageCount = imageContainer?.querySelectorAll(":scope > img[data-program-image]").length || 1;
+        const nextIndex = (Number(imageContainer?.dataset.activeSlide || 0) + 1) % imageCount;
         selectProgramSlide(nextIndex);
     }, 4500);
 }
@@ -623,30 +745,51 @@ function openProgramModal(programKey) {
     document.getElementById("program-audience").textContent = program.audience;
     document.getElementById("program-format").textContent = program.format;
 
-    const image = document.getElementById("program-image");
-    image.src = program.image;
-    image.alt = program.imageAlt;
-    const secondaryImage = document.getElementById("program-image-secondary");
-    const imageContainer = image.closest(".program-detail-image");
+    const programImages = [
+        { src: program.image, alt: program.imageAlt },
+        { src: program.imageSecondary, alt: program.imageSecondaryAlt },
+        { src: program.imageTertiary, alt: program.imageTertiaryAlt },
+        { src: program.imageQuaternary, alt: program.imageQuaternaryAlt },
+        { src: program.imageQuinary, alt: program.imageQuinaryAlt }
+    ].filter((item) => item.src);
+    const imageElements = [
+        document.getElementById("program-image"),
+        document.getElementById("program-image-secondary"),
+        document.getElementById("program-image-tertiary"),
+        document.getElementById("program-image-quaternary"),
+        document.getElementById("program-image-quinary")
+    ];
+    const imageContainer = imageElements[0].closest(".program-detail-image");
+    const programDots = [...programImageDots.querySelectorAll("[data-program-slide]")];
+
+    imageElements.forEach((image, index) => {
+        const imageData = programImages[index];
+        image.toggleAttribute("data-program-image", Boolean(imageData));
+        image.classList.toggle("active", index === 0 && Boolean(imageData));
+        image.hidden = index !== 0 || !imageData;
+        if (imageData) {
+            image.src = imageData.src;
+            image.alt = imageData.alt;
+        } else {
+            image.removeAttribute("src");
+            image.alt = "";
+        }
+    });
+    programDots.forEach((dot, index) => {
+        dot.hidden = index >= programImages.length;
+    });
+
     const showWholeImage = program.imageFit === "contain";
     imageContainer.classList.toggle("fit-whole", showWholeImage);
     if (showWholeImage) imageContainer.style.setProperty("--program-image-bg", `url("${program.image}")`);
     else imageContainer.style.removeProperty("--program-image-bg");
-    if (program.imageSecondary) {
-        secondaryImage.src = program.imageSecondary;
-        secondaryImage.alt = program.imageSecondaryAlt;
+    if (programImages.length > 1) {
         imageContainer.classList.add("carousel-images");
         programImageDots.hidden = false;
         selectProgramSlide(0);
         startProgramCarousel();
     } else {
         window.clearInterval(programCarouselTimer);
-        secondaryImage.src = "";
-        secondaryImage.alt = "";
-        secondaryImage.hidden = true;
-        secondaryImage.classList.remove("active");
-        image.classList.add("active");
-        image.hidden = false;
         imageContainer.classList.remove("carousel-images");
         programImageDots.hidden = true;
     }
@@ -940,7 +1083,18 @@ function renderAuthState(user) {
     if (!user) return;
     document.getElementById("user-name").textContent = `${user.name}님`;
     document.getElementById("user-email").textContent = user.email;
-    document.getElementById("user-avatar").textContent = user.name.slice(0, 1).toUpperCase();
+    const avatarImage = document.getElementById("user-avatar-image");
+    const avatarFallback = document.getElementById("user-avatar-fallback");
+    avatarFallback.textContent = user.name.slice(0, 1).toUpperCase();
+    if (user.avatarUrl) {
+        avatarImage.src = user.avatarUrl;
+        avatarImage.hidden = false;
+        avatarFallback.hidden = true;
+    } else {
+        avatarImage.removeAttribute("src");
+        avatarImage.hidden = true;
+        avatarFallback.hidden = false;
+    }
 }
 
 authOpenButton?.addEventListener("click", () => openAuthModal("login"));
@@ -1011,13 +1165,13 @@ registerForm?.addEventListener("submit", async (event) => {
     submitButton.disabled = true;
     try {
         if (!window.myEducationSupabase) throw new Error("회원가입 서비스를 불러오지 못했습니다. 페이지를 새로고침해 주세요.");
-        const result = await window.myEducationSupabase.signUp(formData.get("name"), formData.get("email"), formData.get("password"));
+        const result = await window.myEducationSupabase.signUp(formData.get("name"), formData.get("email"), formData.get("password"), formData.get("phone"));
         registerForm.reset();
         closeAuthModal();
         closeMenu();
         if (result.needsEmailConfirmation) {
             renderAuthState(null);
-            showAuthToast("가입 확인 이메일을 보냈습니다. 이메일 인증 후 로그인해 주세요.");
+            showAuthToast("가입을 환영합니다! 입력한 주소로 인증 메일을 보냈습니다.");
         } else {
             renderAuthState(result.user);
             showAuthToast(`${result.user.name}님, 가입이 완료되었습니다.`);
@@ -1043,7 +1197,15 @@ logoutButton?.addEventListener("click", async () => {
 
 if (window.myEducationSupabase) {
     window.myEducationSupabase.getCurrentUser()
-    .then((user) => renderAuthState(user))
+    .then((user) => {
+        renderAuthState(user);
+        const url = new URL(window.location.href);
+        if (!user && url.searchParams.get("auth") === "login") {
+            openAuthModal("login");
+            url.searchParams.delete("auth");
+            window.history.replaceState({}, "", `${url.pathname}${url.search}${url.hash}`);
+        }
+    })
     .catch((error) => {
         renderAuthState(null);
         showAuthToast(error.message);
