@@ -117,6 +117,16 @@ h1 {
 
 .auth-result-link:hover { background: #0e548c; }
 
+.password-update-form { display: grid; gap: 16px; margin-top: 28px; text-align: left; }
+.password-update-form[hidden] { display: none; }
+.password-update-form label { display: grid; gap: 7px; }
+.password-update-form label span { color: #304257; font-size: 12px; font-weight: 750; }
+.password-update-form input { width: 100%; height: 50px; padding: 0 14px; border: 1px solid #ccd7dd; border-radius: 8px; outline: 0; color: #17233b; font: inherit; font-size: 14px; }
+.password-update-form input:focus { border-color: #1769aa; box-shadow: 0 0 0 3px rgba(23, 105, 170, .1); }
+.password-update-form button { height: 50px; border: 0; border-radius: 8px; background: #1769aa; color: #fff; font: inherit; font-weight: 800; cursor: pointer; }
+.password-update-form button:disabled { opacity: .6; cursor: wait; }
+#password-update-status { min-height: 20px; margin: -3px 0 0; color: #b13b3b; font-size: 12px; font-weight: 700; text-align: center; }
+
 @keyframes auth-spin { to { transform: rotate(360deg); } }
 
 @media (prefers-reduced-motion: reduce) {

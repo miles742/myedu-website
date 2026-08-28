@@ -515,6 +515,13 @@ h2 { font-size: clamp(39px, 4.4vw, 61px); line-height: 1.25; letter-spacing: -.0
 .auth-submit:hover { background: var(--green-700); transform: translateY(-1px); }
 .auth-submit:disabled { opacity: .65; cursor: wait; transform: none; }
 .auth-status { min-height: 20px; margin: -5px 0 0; color: #bd2d38; font-size: 12px; font-weight: 700; text-align: center; }
+.auth-status.success { color: var(--green-700); }
+.auth-help-actions { display: flex; align-items: center; justify-content: center; gap: 11px; margin-top: -4px; }
+.auth-help-actions button, .auth-back-button { padding: 3px; border: 0; background: none; color: var(--muted); font-size: 11px; font-weight: 750; cursor: pointer; }
+.auth-help-actions button:hover, .auth-back-button:hover { color: var(--blue-950); text-decoration: underline; text-underline-offset: 3px; }
+.auth-help-actions span { width: 1px; height: 11px; background: var(--line); }
+.auth-back-button { justify-self: center; }
+.auth-form-note { margin: -5px 0 0; color: var(--muted); font-size: 10px; line-height: 1.6; text-align: center; }
 .auth-toast { position: fixed; z-index: 7000; right: 24px; bottom: 24px; max-width: min(360px, calc(100% - 48px)); padding: 14px 18px; border-radius: 10px; background: var(--blue-950); color: #fff; box-shadow: 0 16px 40px rgba(3,19,37,.25); font-size: 13px; font-weight: 750; }
 .auth-toast[hidden] { display: none; }
 

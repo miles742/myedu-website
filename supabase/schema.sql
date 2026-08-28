@@ -146,3 +146,66 @@ using (
     bucket_id = 'avatars'
     and (storage.foldername(name))[1] = (select auth.uid())::text
 );
+
+-- 이름과 연락처가 모두 일치할 때 로그인 아이디(이메일)를 일부 가려서 반환합니다.
+-- 원문 이메일을 노출하지 않아 계정 조회 악용 가능성을 줄입니다.
+create or replace function public.find_member_email(p_name text, p_phone text)
+returns text
+language plpgsql
+security definer
+set search_path = ''
+as $$
+declare
+    found_email text;
+    local_part text;
+    domain_part text;
+begin
+    if char_length(trim(coalesce(p_name, ''))) < 2
+       or char_length(regexp_replace(coalesce(p_phone, ''), '\D', '', 'g')) < 9 then
+        return null;
+    end if;
+
+    select lower(user_record.email)
+      into found_email
+      from auth.users as user_record
+     where lower(trim(user_record.raw_user_meta_data ->> 'name')) = lower(trim(p_name))
+       and regexp_replace(coalesce(user_record.raw_user_meta_data ->> 'phone', ''), '\D', '', 'g')
+           = regexp_replace(p_phone, '\D', '', 'g')
+     order by user_record.created_at desc
+     limit 1;
+
+    if found_email is null then return null; end if;
+    local_part := split_part(found_email, '@', 1);
+    domain_part := split_part(found_email, '@', 2);
+    return left(local_part, least(2, char_length(local_part)))
+        || repeat('*', greatest(char_length(local_part) - 2, 1))
+        || '@' || domain_part;
+end;
+$$;
+
+revoke all on function public.find_member_email(text, text) from public;
+grant execute on function public.find_member_email(text, text) to anon, authenticated;
+
+-- 로그인한 회원이 본인 계정만 직접 탈퇴할 수 있습니다.
+create or replace function public.delete_current_user()
+returns void
+language plpgsql
+security definer
+set search_path = ''
+as $$
+declare
+    current_user_id uuid := auth.uid();
+begin
+    if current_user_id is null then
+        raise exception '로그인이 필요합니다.';
+    end if;
+
+    delete from storage.objects
+     where bucket_id = 'avatars'
+       and (storage.foldername(name))[1] = current_user_id::text;
+    delete from auth.users where id = current_user_id;
+end;
+$$;
+
+revoke all on function public.delete_current_user() from public, anon;
+grant execute on function public.delete_current_user() to authenticated;

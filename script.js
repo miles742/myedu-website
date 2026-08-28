@@ -1014,10 +1014,15 @@ const authOpenButton = document.getElementById("auth-open-button");
 const authCloseButtons = [...document.querySelectorAll("[data-auth-close]")];
 const loginTab = document.getElementById("login-tab");
 const registerTab = document.getElementById("register-tab");
+const authTabs = document.querySelector(".auth-tabs");
 const loginForm = document.getElementById("login-form");
 const registerForm = document.getElementById("register-form");
+const findIdForm = document.getElementById("find-id-form");
+const passwordResetForm = document.getElementById("password-reset-form");
 const loginStatus = document.getElementById("login-status");
 const registerStatus = document.getElementById("register-status");
+const findIdStatus = document.getElementById("find-id-status");
+const passwordResetStatus = document.getElementById("password-reset-status");
 const userMenu = document.getElementById("user-menu");
 const userMenuButton = document.getElementById("user-menu-button");
 const userMenuPanel = document.getElementById("user-menu-panel");
@@ -1036,21 +1041,38 @@ function showAuthToast(message) {
     toastTimer = window.setTimeout(() => { authToast.hidden = true; }, 3200);
 }
 
-function switchAuthTab(tab) {
-    const showLogin = tab === "login";
+function switchAuthView(view) {
+    const showLogin = view === "login";
+    const showRegister = view === "register";
     loginTab?.classList.toggle("active", showLogin);
-    registerTab?.classList.toggle("active", !showLogin);
+    registerTab?.classList.toggle("active", showRegister);
     loginTab?.setAttribute("aria-selected", String(showLogin));
-    registerTab?.setAttribute("aria-selected", String(!showLogin));
+    registerTab?.setAttribute("aria-selected", String(showRegister));
+    if (authTabs) authTabs.hidden = !showLogin && !showRegister;
     if (loginForm) loginForm.hidden = !showLogin;
-    if (registerForm) registerForm.hidden = showLogin;
-    if (loginStatus) loginStatus.textContent = "";
-    if (registerStatus) registerStatus.textContent = "";
-    document.getElementById("auth-title").textContent = showLogin ? "다시 만나 반가워요." : "함께 시작해 볼까요?";
-    document.getElementById("auth-description").textContent = showLogin
-        ? "로그인하고 마이에듀케이션의 서비스를 이용해 보세요."
-        : "간단한 정보만 입력하면 바로 회원이 될 수 있어요.";
-    (showLogin ? loginForm : registerForm)?.querySelector("input")?.focus();
+    if (registerForm) registerForm.hidden = !showRegister;
+    if (findIdForm) findIdForm.hidden = view !== "find-id";
+    if (passwordResetForm) passwordResetForm.hidden = view !== "reset-password";
+    [loginStatus, registerStatus, findIdStatus, passwordResetStatus].forEach((status) => {
+        if (!status) return;
+        status.textContent = "";
+        status.classList.remove("success");
+    });
+
+    const copy = {
+        login: ["다시 만나 반가워요.", "로그인하고 마이에듀케이션의 서비스를 이용해 보세요."],
+        register: ["함께 시작해 볼까요?", "간단한 정보만 입력하면 바로 회원이 될 수 있어요."],
+        "find-id": ["가입 아이디를 확인해요.", "가입할 때 입력한 이름과 연락처를 알려 주세요."],
+        "reset-password": ["비밀번호를 다시 설정해요.", "가입 이메일로 안전한 재설정 링크를 보내드릴게요."]
+    }[view] || ["다시 만나 반가워요.", "로그인하고 마이에듀케이션의 서비스를 이용해 보세요."];
+    document.getElementById("auth-title").textContent = copy[0];
+    document.getElementById("auth-description").textContent = copy[1];
+    const activeForm = { login: loginForm, register: registerForm, "find-id": findIdForm, "reset-password": passwordResetForm }[view];
+    activeForm?.querySelector("input")?.focus();
+}
+
+function switchAuthTab(tab) {
+    switchAuthView(tab);
 }
 
 function openAuthModal(tab = "login") {
@@ -1101,6 +1123,9 @@ authOpenButton?.addEventListener("click", () => openAuthModal("login"));
 authCloseButtons.forEach((button) => button.addEventListener("click", closeAuthModal));
 loginTab?.addEventListener("click", () => switchAuthTab("login"));
 registerTab?.addEventListener("click", () => switchAuthTab("register"));
+document.querySelectorAll("[data-auth-view]").forEach((button) => {
+    button.addEventListener("click", () => switchAuthView(button.dataset.authView));
+});
 
 userMenuButton?.addEventListener("click", () => {
     const willOpen = userMenuPanel.hidden;
@@ -1147,6 +1172,49 @@ loginForm?.addEventListener("submit", async (event) => {
         showAuthToast(`${user.name}님, 환영합니다.`);
     } catch (error) {
         loginStatus.textContent = error.message;
+    } finally {
+        submitButton.disabled = false;
+    }
+});
+
+findIdForm?.addEventListener("submit", async (event) => {
+    event.preventDefault();
+    if (!findIdForm.reportValidity()) return;
+    const submitButton = findIdForm.querySelector("button[type='submit']");
+    const formData = new FormData(findIdForm);
+    findIdStatus.classList.remove("success");
+    findIdStatus.textContent = "가입 정보를 확인하고 있습니다...";
+    submitButton.disabled = true;
+    try {
+        if (!window.myEducationSupabase) throw new Error("계정 찾기 서비스를 불러오지 못했습니다.");
+        const maskedEmail = await window.myEducationSupabase.findMemberId(formData.get("name"), formData.get("phone"));
+        findIdStatus.classList.toggle("success", Boolean(maskedEmail));
+        findIdStatus.textContent = maskedEmail
+            ? `회원님의 아이디는 ${maskedEmail} 입니다.`
+            : "일치하는 가입 정보를 찾지 못했습니다. 이름과 연락처를 확인해 주세요.";
+    } catch (error) {
+        findIdStatus.textContent = error.message;
+    } finally {
+        submitButton.disabled = false;
+    }
+});
+
+passwordResetForm?.addEventListener("submit", async (event) => {
+    event.preventDefault();
+    if (!passwordResetForm.reportValidity()) return;
+    const submitButton = passwordResetForm.querySelector("button[type='submit']");
+    const formData = new FormData(passwordResetForm);
+    passwordResetStatus.classList.remove("success");
+    passwordResetStatus.textContent = "재설정 메일을 보내고 있습니다...";
+    submitButton.disabled = true;
+    try {
+        if (!window.myEducationSupabase) throw new Error("비밀번호 찾기 서비스를 불러오지 못했습니다.");
+        await window.myEducationSupabase.requestPasswordReset(formData.get("email"));
+        passwordResetForm.reset();
+        passwordResetStatus.classList.add("success");
+        passwordResetStatus.textContent = "가입된 이메일이라면 재설정 링크가 전송됩니다. 받은편지함을 확인해 주세요.";
+    } catch (error) {
+        passwordResetStatus.textContent = error.message;
     } finally {
         submitButton.disabled = false;
     }
@@ -1200,6 +1268,11 @@ if (window.myEducationSupabase) {
     .then((user) => {
         renderAuthState(user);
         const url = new URL(window.location.href);
+        if (url.searchParams.get("account") === "deleted") {
+            showAuthToast("회원 탈퇴가 완료되었습니다. 그동안 이용해 주셔서 감사합니다.");
+            url.searchParams.delete("account");
+            window.history.replaceState({}, "", `${url.pathname}${url.search}${url.hash}`);
+        }
         if (!user && url.searchParams.get("auth") === "login") {
             openAuthModal("login");
             url.searchParams.delete("auth");

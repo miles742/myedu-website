@@ -77,6 +77,42 @@
         if (error) throw friendlyError(error);
     }
 
+    async function findMemberId(name, phone) {
+        const { data, error } = await client.rpc("find_member_email", {
+            p_name: String(name || "").trim(),
+            p_phone: String(phone || "").replace(/\D/g, "")
+        });
+        if (error) throw friendlyError(error, "아이디를 확인하지 못했습니다.");
+        return data || null;
+    }
+
+    async function requestPasswordReset(email) {
+        const { error } = await client.auth.resetPasswordForEmail(String(email || "").trim().toLowerCase(), {
+            redirectTo: getAuthCallbackUrl("password-reset")
+        });
+        if (error) throw friendlyError(error, "비밀번호 재설정 메일을 보내지 못했습니다.");
+    }
+
+    async function updatePassword(password) {
+        const { error } = await client.auth.updateUser({ password });
+        if (error) throw friendlyError(error, "비밀번호를 변경하지 못했습니다.");
+    }
+
+    async function deleteAccount(password) {
+        const { data: currentData, error: currentError } = await client.auth.getUser();
+        if (currentError || !currentData.user?.email) throw friendlyError(currentError, "로그인 정보를 확인하지 못했습니다.");
+
+        const verification = await client.auth.signInWithPassword({
+            email: currentData.user.email,
+            password: String(password || "")
+        });
+        if (verification.error) throw friendlyError(verification.error, "비밀번호를 확인하지 못했습니다.");
+
+        const { error } = await client.rpc("delete_current_user");
+        if (error) throw friendlyError(error, "회원 탈퇴를 완료하지 못했습니다.");
+        await client.auth.signOut({ scope: "local" });
+    }
+
     async function getCurrentUser() {
         const { data, error } = await client.auth.getUser();
         if (error) {
@@ -155,6 +191,10 @@
         signIn,
         signUp,
         signOut,
+        findMemberId,
+        requestPasswordReset,
+        updatePassword,
+        deleteAccount,
         getCurrentUser,
         updateProfile,
         uploadAvatar,

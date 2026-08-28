@@ -25,6 +25,18 @@
             <p class="auth-result-label">EMAIL VERIFICATION</p>
             <h1 id="auth-result-title">이메일을 확인하고 있습니다.</h1>
             <p id="auth-result-message" aria-live="polite">잠시만 기다려 주세요.</p>
+            <form class="password-update-form" id="password-update-form" hidden>
+                <label>
+                    <span>새 비밀번호</span>
+                    <input type="password" name="password" autocomplete="new-password" required minlength="8" maxlength="128" placeholder="8자 이상 입력해 주세요">
+                </label>
+                <label>
+                    <span>새 비밀번호 확인</span>
+                    <input type="password" name="passwordConfirm" autocomplete="new-password" required minlength="8" maxlength="128" placeholder="비밀번호를 다시 입력해 주세요">
+                </label>
+                <button type="submit">비밀번호 변경</button>
+                <p id="password-update-status" aria-live="polite"></p>
+            </form>
             <a class="auth-result-link" id="auth-result-link" href="index.html" hidden>홈으로 이동</a>
         </section>
     </main>

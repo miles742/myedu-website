@@ -4,6 +4,8 @@ const resultIcon = document.getElementById("auth-result-icon");
 const resultTitle = document.getElementById("auth-result-title");
 const resultMessage = document.getElementById("auth-result-message");
 const resultLink = document.getElementById("auth-result-link");
+const passwordUpdateForm = document.getElementById("password-update-form");
+const passwordUpdateStatus = document.getElementById("password-update-status");
 
 function readAuthError() {
     const query = new URLSearchParams(window.location.search);
@@ -16,10 +18,35 @@ function showResult(type, title, message, href, linkText) {
     resultIcon.replaceChildren();
     resultTitle.textContent = title;
     resultMessage.textContent = message;
+    passwordUpdateForm.hidden = true;
     resultLink.href = href;
     resultLink.textContent = linkText;
     resultLink.hidden = false;
 }
+
+passwordUpdateForm?.addEventListener("submit", async (event) => {
+    event.preventDefault();
+    if (!passwordUpdateForm.reportValidity()) return;
+    const values = new FormData(passwordUpdateForm);
+    const password = String(values.get("password") || "");
+    const submitButton = passwordUpdateForm.querySelector("button[type='submit']");
+    passwordUpdateStatus.textContent = "";
+    if (password !== values.get("passwordConfirm")) {
+        passwordUpdateStatus.textContent = "비밀번호가 서로 일치하지 않습니다.";
+        return;
+    }
+
+    submitButton.disabled = true;
+    try {
+        await window.myEducationSupabase.updatePassword(password);
+        await window.myEducationSupabase.signOut();
+        passwordUpdateForm.reset();
+        showResult("success", "비밀번호가 변경되었습니다.", "새 비밀번호로 다시 로그인해 주세요.", "index.html?auth=login", "로그인 화면으로");
+    } catch (error) {
+        passwordUpdateStatus.textContent = error.message;
+        submitButton.disabled = false;
+    }
+});
 
 async function completeAuthentication() {
     const suppliedError = readAuthError();
@@ -46,10 +73,22 @@ async function completeAuthentication() {
 
         const user = sessionData.session?.user || (await client.auth.getUser()).data.user;
         const flow = new URLSearchParams(window.location.search).get("flow");
+        const hashType = new URLSearchParams(window.location.hash.replace(/^#/, "")).get("type");
         const isEmailChange = flow === "email-change";
 
         if (!user) {
             showResult("error", "인증 정보를 확인하지 못했습니다.", "링크가 만료되었거나 이미 사용되었습니다. 로그인하거나 인증 메일을 다시 요청해 주세요.", "index.html?auth=login", "로그인 화면으로");
+            return;
+        }
+
+        if (flow === "password-reset" || hashType === "recovery") {
+            resultIcon.className = "auth-result-icon is-success";
+            resultIcon.replaceChildren();
+            resultTitle.textContent = "새 비밀번호를 설정해 주세요.";
+            resultMessage.textContent = "안전한 비밀번호를 입력하면 바로 변경됩니다.";
+            resultLink.hidden = true;
+            passwordUpdateForm.hidden = false;
+            passwordUpdateForm.elements.password.focus();
             return;
         }
 

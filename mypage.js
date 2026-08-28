@@ -10,9 +10,14 @@ const profilePhotoFallback = document.getElementById("profile-photo-fallback");
 const profilePhotoRemove = document.getElementById("profile-photo-remove");
 const profilePhotoStatus = document.getElementById("profile-photo-status");
 const logoutButton = document.getElementById("mypage-logout");
+const deleteAccountOpen = document.getElementById("account-delete-open");
+const deleteAccountModal = document.getElementById("delete-account-modal");
+const deleteAccountForm = document.getElementById("delete-account-form");
+const deleteAccountStatus = document.getElementById("delete-account-status");
 const toast = document.getElementById("mypage-toast");
 let currentUser = null;
 let toastTimer = null;
+let deleteModalTimer = null;
 
 function showToast(message) {
     window.clearTimeout(toastTimer);
@@ -157,6 +162,56 @@ logoutButton?.addEventListener("click", async () => {
     } catch (error) {
         showToast(error.message);
         logoutButton.disabled = false;
+    }
+});
+
+function openDeleteAccountModal() {
+    window.clearTimeout(deleteModalTimer);
+    deleteAccountStatus.textContent = "";
+    deleteAccountForm.reset();
+    deleteAccountModal.hidden = false;
+    document.body.style.overflow = "hidden";
+    requestAnimationFrame(() => {
+        deleteAccountModal.classList.add("open");
+        deleteAccountForm.elements.password.focus();
+    });
+}
+
+function closeDeleteAccountModal() {
+    if (deleteAccountForm.querySelector("button[type='submit']").disabled) return;
+    deleteAccountModal.classList.remove("open");
+    document.body.style.removeProperty("overflow");
+    deleteModalTimer = window.setTimeout(() => {
+        deleteAccountModal.hidden = true;
+        deleteAccountOpen.focus();
+    }, 200);
+}
+
+deleteAccountOpen?.addEventListener("click", openDeleteAccountModal);
+document.querySelectorAll("[data-delete-close]").forEach((button) => button.addEventListener("click", closeDeleteAccountModal));
+deleteAccountModal?.addEventListener("keydown", (event) => {
+    if (event.key === "Escape") closeDeleteAccountModal();
+});
+
+deleteAccountForm?.addEventListener("submit", async (event) => {
+    event.preventDefault();
+    if (!deleteAccountForm.reportValidity()) return;
+    const values = new FormData(deleteAccountForm);
+    const submitButton = deleteAccountForm.querySelector("button[type='submit']");
+    deleteAccountStatus.textContent = "";
+    if (String(values.get("confirmation") || "").trim() !== "회원탈퇴") {
+        deleteAccountStatus.textContent = "확인 문구 ‘회원탈퇴’를 정확히 입력해 주세요.";
+        return;
+    }
+
+    submitButton.disabled = true;
+    deleteAccountStatus.textContent = "계정과 회원정보를 삭제하고 있습니다...";
+    try {
+        await window.myEducationSupabase.deleteAccount(values.get("password"));
+        window.location.replace("index.html?account=deleted");
+    } catch (error) {
+        deleteAccountStatus.textContent = error.message;
+        submitButton.disabled = false;
     }
 });
 

@@ -609,17 +609,39 @@
                 <label><span>이메일</span><input type="email" name="email" autocomplete="email" required placeholder="name@example.com"></label>
                 <label><span>비밀번호</span><input type="password" name="password" autocomplete="current-password" required minlength="8" placeholder="비밀번호를 입력해 주세요"></label>
                 <button class="auth-submit" type="submit">로그인</button>
+                <div class="auth-help-actions" aria-label="계정 찾기">
+                    <button type="button" data-auth-view="find-id">아이디 찾기</button>
+                    <span aria-hidden="true"></span>
+                    <button type="button" data-auth-view="reset-password">비밀번호 찾기</button>
+                </div>
                 <p class="auth-status" id="login-status" aria-live="polite"></p>
             </form>
 
             <form class="auth-form" id="register-form" hidden>
                 <label><span>이름</span><input type="text" name="name" autocomplete="name" required minlength="2" maxlength="30" placeholder="이름을 입력해 주세요"></label>
                 <label><span>이메일</span><input type="email" name="email" autocomplete="email" required placeholder="name@example.com"></label>
-                <label><span>연락처 <small>(선택)</small></span><input type="tel" name="phone" autocomplete="tel" maxlength="20" placeholder="010-0000-0000"></label>
+                <label><span>연락처</span><input type="tel" name="phone" autocomplete="tel" required maxlength="20" pattern="[0-9+()\-\s]{9,20}" placeholder="010-0000-0000"><small>아이디 찾기와 본인 확인에 사용됩니다.</small></label>
                 <label><span>비밀번호</span><input type="password" name="password" autocomplete="new-password" required minlength="8" maxlength="128" placeholder="8자 이상 입력해 주세요"></label>
                 <label><span>비밀번호 확인</span><input type="password" name="passwordConfirm" autocomplete="new-password" required minlength="8" maxlength="128" placeholder="비밀번호를 다시 입력해 주세요"></label>
                 <button class="auth-submit" type="submit">회원가입</button>
                 <p class="auth-status" id="register-status" aria-live="polite"></p>
+            </form>
+
+            <form class="auth-form auth-recovery-form" id="find-id-form" hidden>
+                <label><span>가입자 이름</span><input type="text" name="name" autocomplete="name" required minlength="2" maxlength="30" placeholder="가입 시 입력한 이름"></label>
+                <label><span>가입자 연락처</span><input type="tel" name="phone" autocomplete="tel" required maxlength="20" pattern="[0-9+()\-\s]{9,20}" placeholder="010-0000-0000"></label>
+                <button class="auth-submit" type="submit">아이디 확인</button>
+                <button class="auth-back-button" type="button" data-auth-view="login">로그인으로 돌아가기</button>
+                <p class="auth-form-note">가입 시 연락처를 입력하지 않은 기존 회원은 고객센터로 문의해 주세요.</p>
+                <p class="auth-status" id="find-id-status" aria-live="polite"></p>
+            </form>
+
+            <form class="auth-form auth-recovery-form" id="password-reset-form" hidden>
+                <label><span>가입 이메일</span><input type="email" name="email" autocomplete="email" required maxlength="254" placeholder="name@example.com"></label>
+                <button class="auth-submit" type="submit">비밀번호 재설정 메일 보내기</button>
+                <button class="auth-back-button" type="button" data-auth-view="login">로그인으로 돌아가기</button>
+                <p class="auth-form-note">메일의 링크를 열어 새 비밀번호를 설정할 수 있습니다.</p>
+                <p class="auth-status" id="password-reset-status" aria-live="polite"></p>
             </form>
         </section>
     </div>

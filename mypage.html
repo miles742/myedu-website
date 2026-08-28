@@ -79,6 +79,15 @@
                     <p class="profile-form-status" id="profile-form-status" aria-live="polite"></p>
                 </form>
             </section>
+
+            <section class="account-danger-card" aria-labelledby="account-danger-title">
+                <div>
+                    <p>ACCOUNT MANAGEMENT</p>
+                    <h2 id="account-danger-title">회원 탈퇴</h2>
+                    <span>탈퇴하면 계정과 프로필 사진이 삭제되며 복구할 수 없습니다.</span>
+                </div>
+                <button id="account-delete-open" type="button">회원 탈퇴</button>
+            </section>
         </div>
 
         <section class="mypage-loading" id="mypage-loading" aria-live="polite">
@@ -86,6 +95,26 @@
             <p>회원정보를 불러오고 있습니다.</p>
         </section>
     </main>
+
+    <div class="delete-account-modal" id="delete-account-modal" hidden>
+        <div class="delete-account-backdrop" data-delete-close></div>
+        <section class="delete-account-dialog" role="dialog" aria-modal="true" aria-labelledby="delete-account-title">
+            <button class="delete-account-close" type="button" aria-label="회원 탈퇴 창 닫기" data-delete-close></button>
+            <p>DELETE ACCOUNT</p>
+            <h2 id="delete-account-title">정말 탈퇴하시겠어요?</h2>
+            <p>회원정보와 프로필 사진이 영구 삭제됩니다. 본인 확인을 위해 비밀번호와 아래 확인 문구를 입력해 주세요.</p>
+            <form id="delete-account-form">
+                <label><span>현재 비밀번호</span><input type="password" name="password" autocomplete="current-password" required minlength="8" maxlength="128"></label>
+                <label><span>확인 문구</span><input type="text" name="confirmation" autocomplete="off" required placeholder="회원탈퇴" aria-describedby="delete-confirm-hint"></label>
+                <small id="delete-confirm-hint"><strong>회원탈퇴</strong>를 정확히 입력해 주세요.</small>
+                <div class="delete-account-actions">
+                    <button type="button" data-delete-close>취소</button>
+                    <button type="submit">계정 영구 삭제</button>
+                </div>
+                <p id="delete-account-status" aria-live="polite"></p>
+            </form>
+        </section>
+    </div>
 
     <div class="mypage-toast" id="mypage-toast" role="status" aria-live="polite" hidden></div>
 </body>
