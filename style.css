@@ -163,33 +163,24 @@ h2 { font-size: clamp(39px, 4.4vw, 61px); line-height: 1.25; letter-spacing: -.0
 .organization-heading .section-label { grid-column: 1 / -1; margin-bottom: -50px; }
 .organization-heading h3 { font-size: clamp(32px, 3.8vw, 50px); line-height: 1.3; letter-spacing: -.05em; }
 .organization-heading > p:last-child { max-width: 430px; padding-bottom: 7px; color: var(--muted); font-size: 15px; }
-.organization-chart { max-width: 940px; margin: 80px auto 0; }
-.org-level { position: relative; display: flex; justify-content: center; }
-.org-card { position: relative; width: 100%; min-height: 220px; display: flex; align-items: center; gap: 22px; padding: 34px 28px 62px; border: 1px solid var(--line); border-radius: 16px; background: #fff; box-shadow: 0 16px 45px rgba(17,54,103,.07); transition: transform .3s, border-color .3s, box-shadow .3s; }
-.org-card:hover { transform: translateY(-6px); border-color: var(--green-300); box-shadow: 0 24px 50px rgba(47,104,72,.13); }
-.org-card:focus-visible { outline: 3px solid rgba(65,125,89,.35); outline-offset: 4px; }
-.org-card-leader { width: 360px; min-height: 250px; padding: 38px 32px 66px; border-color: transparent; background: linear-gradient(145deg, var(--blue-800), var(--blue-950)); color: #fff; box-shadow: 0 22px 55px rgba(7,27,61,.22); }
-.org-card-leader:hover { transform: none; border-color: transparent; box-shadow: 0 22px 55px rgba(7,27,61,.22); }
-.org-badge { position: absolute; top: 20px; right: 22px; color: #91a0b6; font-size: 9px; font-weight: 800; letter-spacing: .16em; }
-.org-card-leader .org-badge { color: var(--green-300); }
-.org-avatar { flex: 0 0 88px; height: 88px; display: grid; place-items: center; overflow: hidden; border-radius: 22px; background: var(--green-100); color: var(--green-700); font-size: 17px; font-weight: 800; box-shadow: 0 12px 28px rgba(17,54,103,.12); }
-.org-avatar img { width: 100%; height: 100%; object-fit: cover; object-position: center top; transform: scale(1.08); }
-.org-card-leader .org-avatar { background: rgba(255,255,255,.12); color: #fff; }
-.org-card-leader .org-avatar { flex-basis: 112px; height: 112px; border-radius: 28px; box-shadow: 0 15px 34px rgba(0,0,0,.2); }
-.org-person { display: grid; gap: 2px; }
-.org-person strong { font-size: 21px; letter-spacing: -.035em; }
-.org-person span { color: var(--muted); font-size: 12px; font-weight: 650; }
-.org-card-leader .org-person span { color: #94b9eb; }
-.org-email { position: absolute; right: 18px; bottom: 17px; display: inline-flex; align-items: center; min-height: 28px; padding: 5px 10px; border: 1px solid rgba(38,91,126,.14); border-radius: 5px; background: var(--blue-50); color: var(--blue-600); font-size: 10px; font-weight: 750; letter-spacing: .015em; line-height: 1; }
-.org-card-leader .org-email { border-color: rgba(255,255,255,.18); background: rgba(255,255,255,.1); color: #dbeaf4; }
-.org-connector { position: relative; height: 90px; }
-.org-connector::before { content: ""; position: absolute; top: 0; left: 50%; width: 1px; height: 45px; background: #aec3df; }
-.org-connector::after { content: ""; position: absolute; top: 44px; left: 16.666%; right: 16.666%; height: 1px; background: #aec3df; }
-.org-connector span::before, .org-connector span::after { content: ""; position: absolute; top: 44px; width: 1px; height: 46px; background: #aec3df; }
-.org-connector span::before { left: 16.666%; }
-.org-connector span::after { right: 16.666%; }
-.org-members { display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px; }
-.org-members .org-card:nth-child(2)::before { content: ""; position: absolute; left: 50%; top: -46px; width: 1px; height: 46px; background: #aec3df; }
+.organization-chart { max-width: 1180px; margin: 80px auto 0; }
+.org-company, .org-director { position: relative; display: grid; place-items: center; margin-inline: auto; color: #fff; text-align: center; }
+.org-company { width: min(380px, 86%); min-height: 92px; padding: 18px 30px; border-radius: 46px; background: linear-gradient(135deg, var(--blue-600), var(--blue-900)); box-shadow: 0 20px 45px rgba(17,54,103,.2); }
+.org-company span, .org-director span { font-size: 9px; font-weight: 850; letter-spacing: .16em; opacity: .72; }
+.org-company strong { font-size: 27px; letter-spacing: -.035em; }
+.org-company::after { content: ""; position: absolute; top: 100%; left: 50%; width: 1px; height: 70px; background: #9fb4c7; }
+.org-director { width: min(330px, 76%); min-height: 76px; margin-top: 70px; padding: 15px 26px; border-radius: 38px; background: linear-gradient(135deg, #435366, #26384e); box-shadow: 0 16px 34px rgba(11,25,48,.17); }
+.org-director strong { font-size: 22px; letter-spacing: -.025em; }
+.org-director::after { content: ""; position: absolute; top: 100%; left: 50%; width: 1px; height: 31px; background: #9fb4c7; }
+.org-team-grid { position: relative; display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 14px; padding-top: 62px; }
+.org-team-grid::before { content: ""; position: absolute; top: 30px; left: 10%; right: 10%; height: 1px; background: #9fb4c7; }
+.org-team { position: relative; min-width: 0; border: 1px solid #dce5ea; border-radius: 16px; background: #fff; box-shadow: 0 16px 38px rgba(17,54,103,.07); transition: transform .25s, box-shadow .25s; }
+.org-team::before { content: ""; position: absolute; left: 50%; bottom: 100%; width: 1px; height: 32px; background: #9fb4c7; }
+.org-team:hover { transform: translateY(-5px); box-shadow: 0 22px 44px rgba(17,54,103,.12); }
+.org-team h4 { min-height: 76px; display: flex; align-items: center; justify-content: center; gap: 8px; padding: 15px 10px; border-radius: 15px 15px 0 0; background: linear-gradient(135deg, #33485f, #1c3046); color: #fff; font-size: clamp(15px, 1.35vw, 19px); letter-spacing: -.025em; text-align: center; }
+.org-team h4 span { color: var(--green-300); font-family: "Bebas Neue", Impact, sans-serif; font-size: 16px; font-weight: 400; letter-spacing: .04em; }
+.org-team ul { display: grid; gap: 8px; padding: 14px; }
+.org-team li { min-height: 48px; display: grid; place-items: center; padding: 9px 7px; border-radius: 10px; background: #f2f5f6; color: #263851; font-size: 12px; font-weight: 750; line-height: 1.35; text-align: center; word-break: keep-all; }
 
 .ceo-message { position: relative; overflow: hidden; background: radial-gradient(circle at 12% 22%, rgba(255,255,255,.38), transparent 31%), radial-gradient(circle at 88% 76%, rgba(83,169,207,.11), transparent 30%), linear-gradient(180deg, rgba(241,248,248,.5) 0%, rgba(223,239,248,.54) 52%, rgba(239,248,250,.48) 100%); color: var(--ink); }
 .ceo-message::before { content: "CEO"; position: absolute; right: -30px; bottom: -110px; color: rgba(8,43,76,.035); font-family: "Bebas Neue", Impact, sans-serif; font-size: clamp(250px, 38vw, 570px); line-height: 1; pointer-events: none; }
@@ -675,16 +666,16 @@ main > section:nth-of-type(even) .reveal { --reveal-x: 58px; }
     .value-icon { width: 56px; height: 56px; margin-bottom: 25px; border-radius: 13px; font-size: 28px; }
     .organization { margin-top: 85px; padding-top: 80px; }
     .organization-chart { margin-top: 60px; }
-    .org-card-leader { width: min(350px, 92%); min-height: 235px; }
-    .org-connector { height: 55px; }
-    .org-connector::before { height: 55px; }
-    .org-connector::after, .org-connector span::before, .org-connector span::after { display: none; }
-    .org-members { grid-template-columns: 1fr; gap: 14px; }
-    .org-members .org-card::before { content: ""; position: absolute; top: -15px; left: 50%; width: 1px; height: 15px; background: #aec3df; }
-    .org-card { min-height: 205px; padding: 27px 22px 58px; }
-    .org-avatar { flex-basis: 76px; height: 76px; border-radius: 19px; }
-    .org-card-leader .org-avatar { flex-basis: 98px; height: 98px; border-radius: 24px; }
-    .org-email { right: 14px; bottom: 14px; }
+    .org-company { min-height: 82px; }
+    .org-company strong { font-size: 23px; }
+    .org-company::after { height: 55px; }
+    .org-director { min-height: 70px; margin-top: 55px; }
+    .org-team-grid { grid-template-columns: 1fr; gap: 14px; padding: 45px 0 0 42px; }
+    .org-team-grid::before { top: 0; bottom: 28px; left: 19px; right: auto; width: 1px; height: auto; }
+    .org-team::before { top: 34px; right: 100%; bottom: auto; left: auto; width: 23px; height: 1px; }
+    .org-team h4 { min-height: 68px; font-size: 18px; }
+    .org-team ul { grid-template-columns: 1fr; }
+    .org-team li { min-height: 45px; font-size: 13px; }
     .ceo-message-grid { grid-template-columns: 1fr; gap: 62px; }
     .ceo-message-visual { width: min(100% - 18px, 520px); margin: 0 auto; }
     .ceo-message-visual img { height: min(680px, 145vw); min-height: 520px; }
