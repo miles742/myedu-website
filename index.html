@@ -11,6 +11,7 @@
     <link rel="stylesheet" href="style.css">
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2" defer></script>
     <script src="supabase-client.js" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/qrcode-generator@2.0.4/dist/qrcode.js" defer></script>
     <script src="script.js" defer></script>
 </head>
 <body>
@@ -810,10 +811,10 @@
                         <p><a href="mailto:Sally@my-edus.com">대표 이메일 : Sally@my-edus.com</a><a href="tel:01023002461">대표 연락처 : 010-2300-2461</a><span>FAX : 0504-050-5802</span></p>
                     </div>
 
-                    <div class="footer-mobile">
-                        <img src="images/mobile-access-qr-current.svg" alt="모바일 홈페이지 접속 QR코드">
-                        <div><strong>MOBILE VIEW</strong><span>같은 Wi-Fi에서 접속하세요</span><a href="http://192.168.0.200:8000/">192.168.0.200:8000</a></div>
-                    </div>
+                    <a class="footer-mobile" id="mobile-access-link" href="/" aria-label="모바일에서 마이에듀케이션 홈페이지 접속">
+                        <img id="mobile-access-qr" alt="마이에듀케이션 공식 홈페이지 접속 QR코드" width="68" height="68">
+                        <div><strong>MOBILE ACCESS</strong><span>QR 코드를 스캔해 접속하세요</span><em>공식 홈페이지 바로가기</em></div>
+                    </a>
                 </div>
 
                 <div class="footer-bottom"><span>© 2026 MY EDUCATION CO., LTD. ALL RIGHTS RESERVED.</span><a href="#home">BACK TO TOP ↑</a></div>

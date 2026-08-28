@@ -8,6 +8,8 @@ const inquiryStatus = document.getElementById("inquiry-status");
 const inquiryOpenButtons = [...document.querySelectorAll("[data-inquiry-open]")];
 const inquiryCloseButtons = [...document.querySelectorAll("[data-inquiry-close]")];
 const floatingInquiry = document.querySelector(".floating-inquiry");
+const mobileAccessLink = document.getElementById("mobile-access-link");
+const mobileAccessQr = document.getElementById("mobile-access-qr");
 let inquiryLastFocused = null;
 let inquiryCloseTimer = null;
 const programModal = document.getElementById("program-modal");
@@ -140,6 +142,26 @@ let inquiryPointerY = window.innerHeight - 132;
 let inquiryCurrentX = inquiryPointerX;
 let inquiryCurrentY = inquiryPointerY;
 let inquiryAnimationFrame = null;
+
+function initializeMobileAccessQr() {
+    if (!mobileAccessLink || !mobileAccessQr) return;
+    const homepageUrl = new URL("/", window.location.href).href;
+    mobileAccessLink.href = homepageUrl;
+
+    try {
+        if (typeof window.qrcode !== "function") throw new Error("QR generator unavailable");
+        const qr = window.qrcode(0, "M");
+        qr.addData(homepageUrl);
+        qr.make();
+        mobileAccessQr.src = qr.createDataURL(5, 4);
+        mobileAccessQr.hidden = false;
+    } catch (error) {
+        mobileAccessQr.hidden = true;
+        console.warn("모바일 접속 QR 코드를 생성하지 못했습니다.");
+    }
+}
+
+initializeMobileAccessQr();
 let inquiryPointerLocked = false;
 
 function selectCarouselSlide(carousel, index) {
