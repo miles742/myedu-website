@@ -1,4 +1,19 @@
 project_id = "rmhbnquzuerwaysinqfw"
 
+[auth]
+site_url = "https://myedu-website.vercel.app"
+additional_redirect_urls = [
+    "https://myedu-website.vercel.app/auth-callback.html",
+    "http://localhost:8000/auth-callback.html"
+]
+
+[auth.email]
+max_frequency = "1m0s"
+otp_length = 8
+
+[auth.mfa.totp]
+enroll_enabled = true
+verify_enabled = true
+
 [functions.send-welcome-email]
 verify_jwt = false

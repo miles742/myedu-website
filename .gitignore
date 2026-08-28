@@ -6,6 +6,7 @@ data/instructor-applications.json.tmp
 .env.local
 .env.*
 !.env.example
+supabase/.temp/
 .env
 .env.local
 .env.*

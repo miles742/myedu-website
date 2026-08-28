@@ -31,12 +31,12 @@ Storage에는 다음 버킷이 생성됩니다.
 
 Supabase Dashboard에서 **Authentication > URL Configuration**을 엽니다.
 
-- **Site URL**에는 사용자가 실제로 접속하는 홈페이지 주소를 입력합니다. 예: `https://example.com`
-- **Redirect URLs**에는 실제 홈페이지의 `https://example.com/auth-callback.html`을 추가합니다.
+- **Site URL**에는 `https://myedu-website.vercel.app`을 입력합니다.
+- **Redirect URLs**에는 `https://myedu-website.vercel.app/auth-callback.html`을 추가합니다.
 - Vercel 미리보기 주소도 사용한다면 해당 주소의 `auth-callback.html`을 각각 추가합니다.
 - 로컬 확인을 위해 `http://localhost:8000/auth-callback.html`도 추가합니다.
 
-`example.com`은 반드시 실제 배포 도메인으로 바꿔야 합니다. 이 설정이 localhost 또는 이전 배포 주소로 남아 있으면 이메일의 인증 링크에서 "연결할 수 없음"이 표시됩니다.
+추후 별도 맞춤 도메인을 연결하면 해당 도메인과 `auth-callback.html` 주소도 함께 추가해야 합니다. 이 설정이 localhost 또는 이전 배포 주소로 남아 있으면 이메일의 인증 링크에서 "연결할 수 없음"이 표시됩니다.
 
 홈페이지는 회원가입, 이메일 변경, 비밀번호 재설정 메일의 도착 지점을 `auth-callback.html`로 지정합니다. Authentication의 이메일 확인 기능이 켜져 있으면 신규 회원은 수신한 링크를 누른 뒤 로그인할 수 있습니다. **Secure email change**가 켜져 있으면 이메일 변경 시 기존 주소와 새 주소 양쪽에 확인 메일이 전송될 수 있으며, 두 메일의 확인이 모두 필요합니다.
 
