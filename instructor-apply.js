@@ -2,6 +2,28 @@ const applicationForm = document.getElementById("instructor-application-form");
 const applicationStatus = document.getElementById("application-status");
 const introduction = applicationForm?.elements.introduction;
 const introductionCount = document.getElementById("introduction-count");
+const mobileAccessLink = document.getElementById("mobile-access-link");
+const mobileAccessQr = document.getElementById("mobile-access-qr");
+
+function initializeMobileAccessQr() {
+    if (!mobileAccessLink || !mobileAccessQr) return;
+    const homepageUrl = new URL("/", window.location.href).href;
+    mobileAccessLink.href = homepageUrl;
+
+    try {
+        if (typeof window.qrcode !== "function") throw new Error("QR generator unavailable");
+        const qr = window.qrcode(0, "M");
+        qr.addData(homepageUrl);
+        qr.make();
+        mobileAccessQr.src = qr.createDataURL(5, 4);
+        mobileAccessQr.hidden = false;
+    } catch (error) {
+        mobileAccessQr.hidden = true;
+        console.warn("모바일 접속 QR 코드를 생성하지 못했습니다.");
+    }
+}
+
+initializeMobileAccessQr();
 
 function updateIntroductionCount() {
     if (introductionCount && introduction) introductionCount.textContent = introduction.value.length.toLocaleString("ko-KR");
