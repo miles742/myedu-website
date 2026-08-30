@@ -18,8 +18,11 @@
     });
 
     function getAuthCallbackUrl(flow) {
-        const callbackUrl = new URL("auth-callback.html", window.location.href);
+        const callbackUrl = new URL("/auth-callback.html", window.location.href);
         callbackUrl.searchParams.set("flow", flow);
+        if (window.location.pathname.toLowerCase().includes("/l2k-edu/")) {
+            callbackUrl.searchParams.set("return", "l2k");
+        }
         return callbackUrl.href;
     }
 

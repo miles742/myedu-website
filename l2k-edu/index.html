@@ -8,8 +8,11 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&amp;family=Noto+Sans+KR:wght@400;500;600;700;800;900&amp;display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="style.css?v=20260830-3">
-    <script src="script.js?v=20260830-2" defer></script>
+    <link rel="stylesheet" href="style.css?v=20260830-4">
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2" defer></script>
+    <script src="../supabase-client.js?v=20260830-4" defer></script>
+    <script src="script.js?v=20260830-4" defer></script>
+    <script src="auth.js?v=20260830-4" defer></script>
 </head>
 <body>
     <a class="skip-link" href="#main">본문 바로가기</a>
@@ -31,6 +34,17 @@
                 <a href="#process">PROCESS</a>
                 <a href="#insight">INSIGHT</a>
                 <a class="nav-contact" href="#contact">CONTACT <span aria-hidden="true">↗</span></a>
+                <button class="auth-nav-button" id="auth-open-button" type="button">로그인</button>
+                <div class="user-menu" id="user-menu" hidden>
+                    <button class="user-menu-button" id="user-menu-button" type="button" aria-expanded="false" aria-controls="user-menu-panel">
+                        <span class="user-initial" id="user-initial" aria-hidden="true">L</span>
+                        <span id="user-name">회원</span><span class="user-menu-chevron" aria-hidden="true">⌄</span>
+                    </button>
+                    <div class="user-menu-panel" id="user-menu-panel" hidden>
+                        <span id="user-email"></span>
+                        <button id="logout-button" type="button">로그아웃</button>
+                    </div>
+                </div>
             </nav>
         </div>
     </header>
@@ -212,6 +226,57 @@
             </div>
         </section>
     </main>
+
+    <div class="auth-modal" id="auth-modal" hidden>
+        <div class="auth-backdrop" data-auth-close></div>
+        <section class="auth-dialog" role="dialog" aria-modal="true" aria-labelledby="auth-title">
+            <button class="auth-close" type="button" aria-label="로그인 창 닫기" data-auth-close></button>
+            <div class="auth-brand">
+                <span>L2K EDU MEMBER</span>
+                <h2 id="auth-title">다시 만나 반가워요.</h2>
+                <p id="auth-description">로그인하고 L2K EDU의 서비스를 이용해 보세요.</p>
+            </div>
+            <div class="auth-tabs" role="tablist" aria-label="회원 인증">
+                <button class="active" id="login-tab" type="button" role="tab" aria-selected="true" aria-controls="login-form">로그인</button>
+                <button id="register-tab" type="button" role="tab" aria-selected="false" aria-controls="register-form">회원가입</button>
+            </div>
+            <form class="auth-form" id="login-form">
+                <label><span>이메일</span><input type="email" name="email" autocomplete="email" required placeholder="name@example.com"></label>
+                <label><span>비밀번호</span><input type="password" name="password" autocomplete="current-password" required minlength="8" placeholder="비밀번호를 입력해 주세요"></label>
+                <button class="auth-submit" type="submit">로그인</button>
+                <div class="auth-help-actions" aria-label="계정 찾기">
+                    <button type="button" data-auth-view="find-id">아이디 찾기</button><span aria-hidden="true"></span>
+                    <button type="button" data-auth-view="reset-password">비밀번호 찾기</button>
+                </div>
+                <p class="auth-status" id="login-status" aria-live="polite"></p>
+            </form>
+            <form class="auth-form" id="register-form" hidden>
+                <label><span>이름</span><input type="text" name="name" autocomplete="name" required minlength="2" maxlength="30" placeholder="이름을 입력해 주세요"></label>
+                <label><span>이메일</span><input type="email" name="email" autocomplete="email" required maxlength="254" placeholder="name@example.com"></label>
+                <label><span>연락처</span><input type="tel" name="phone" autocomplete="tel" required maxlength="20" pattern="[0-9+()\-\s]{9,20}" placeholder="010-0000-0000"><small>아이디 찾기와 본인 확인에 사용됩니다.</small></label>
+                <label><span>비밀번호</span><input type="password" name="password" autocomplete="new-password" required minlength="8" maxlength="128" placeholder="8자 이상 입력해 주세요"></label>
+                <label><span>비밀번호 확인</span><input type="password" name="passwordConfirm" autocomplete="new-password" required minlength="8" maxlength="128" placeholder="비밀번호를 다시 입력해 주세요"></label>
+                <button class="auth-submit" type="submit">회원가입</button>
+                <p class="auth-status" id="register-status" aria-live="polite"></p>
+            </form>
+            <form class="auth-form" id="find-id-form" hidden>
+                <label><span>가입자 이름</span><input type="text" name="name" autocomplete="name" required minlength="2" maxlength="30" placeholder="가입 시 입력한 이름"></label>
+                <label><span>가입자 연락처</span><input type="tel" name="phone" autocomplete="tel" required maxlength="20" pattern="[0-9+()\-\s]{9,20}" placeholder="010-0000-0000"></label>
+                <button class="auth-submit" type="submit">아이디 확인</button>
+                <button class="auth-back-button" type="button" data-auth-view="login">로그인으로 돌아가기</button>
+                <p class="auth-form-note">가입할 때 입력한 이름과 연락처로 이메일 아이디를 확인합니다.</p>
+                <p class="auth-status" id="find-id-status" aria-live="polite"></p>
+            </form>
+            <form class="auth-form" id="password-reset-form" hidden>
+                <label><span>가입 이메일</span><input type="email" name="email" autocomplete="email" required maxlength="254" placeholder="name@example.com"></label>
+                <button class="auth-submit" type="submit">비밀번호 재설정 메일 보내기</button>
+                <button class="auth-back-button" type="button" data-auth-view="login">로그인으로 돌아가기</button>
+                <p class="auth-form-note">메일의 링크를 열어 새 비밀번호를 설정할 수 있습니다.</p>
+                <p class="auth-status" id="password-reset-status" aria-live="polite"></p>
+            </form>
+        </section>
+    </div>
+    <div class="auth-toast" id="auth-toast" role="status" aria-live="polite" hidden></div>
 
     <footer class="site-footer">
         <div class="shell footer-top">
