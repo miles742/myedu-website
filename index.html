@@ -8,11 +8,11 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&amp;family=Noto+Sans+KR:wght@800;900&amp;family=Noto+Serif+KR:wght@600;700&amp;display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="style.css?v=20260830-2">
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2" defer></script>
     <script src="supabase-client.js" defer></script>
     <script src="https://cdn.jsdelivr.net/npm/qrcode-generator@2.0.4/dist/qrcode.js" defer></script>
-    <script src="script.js" defer></script>
+    <script src="script.js?v=20260830-2" defer></script>
 </head>
 <body>
     <a class="skip-link" href="#main">본문 바로가기</a>
@@ -844,7 +844,19 @@
                     </a>
                 </div>
 
-                <div class="footer-bottom"><span>© 2026 MY EDUCATION CO., LTD. ALL RIGHTS RESERVED.</span><a href="#home">BACK TO TOP ↑</a></div>
+                <div class="footer-bottom">
+                    <span>© 2026 MY EDUCATION CO., LTD. ALL RIGHTS RESERVED.</span>
+                    <div class="footer-bottom-actions">
+                        <div class="family-site">
+                            <label for="family-site-select">FAMILY SITE</label>
+                            <select id="family-site-select" aria-label="패밀리 사이트 이동">
+                                <option value="">+++Quick Link+++</option>
+                                <option value="l2k-edu/index.html">L2K EDU</option>
+                            </select>
+                        </div>
+                        <a href="#home">BACK TO TOP ↑</a>
+                    </div>
+                </div>
             </div>
         </div>
     </footer>

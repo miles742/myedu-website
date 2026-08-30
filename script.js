@@ -1285,6 +1285,15 @@ logoutButton?.addEventListener("click", async () => {
     }
 });
 
+const familySiteSelect = document.getElementById("family-site-select");
+familySiteSelect?.addEventListener("change", () => {
+    if (!familySiteSelect.value) return;
+    window.location.assign(familySiteSelect.value);
+});
+window.addEventListener("pageshow", () => {
+    if (familySiteSelect) familySiteSelect.value = "";
+});
+
 if (window.myEducationSupabase) {
     window.myEducationSupabase.getCurrentUser()
     .then((user) => {

@@ -561,6 +561,12 @@ h2 { font-size: clamp(39px, 4.4vw, 61px); line-height: 1.25; letter-spacing: -.0
 .footer-mobile em { color: var(--blue-800); font-size: 9px; font-style: normal; font-weight: 750; }
 .footer-bottom { display: flex; justify-content: space-between; gap: 24px; margin-top: 13px; color: #a0a8b1; font-size: 9px; letter-spacing: .035em; }
 .footer-bottom a { flex: 0 0 auto; color: #7b8794; font-weight: 700; }
+.footer-bottom-actions { display: flex; align-items: flex-end; gap: 24px; }
+.family-site { display: grid; gap: 6px; min-width: 190px; }
+.family-site label { color: #7b8794; font-size: 11px; font-weight: 700; letter-spacing: .08em; }
+.family-site select { width: 100%; height: 34px; padding: 0 34px 0 10px; border: 1px solid #85909b; border-radius: 5px; background-color: #fff; color: #536170; font: 600 12px "Noto Sans KR", sans-serif; cursor: pointer; }
+.family-site select:hover { border-color: var(--blue-800); }
+.family-site select:focus-visible { outline: 3px solid rgba(65,125,89,.28); outline-offset: 2px; }
 
 .sound-toggle { position: fixed; right: 24px; bottom: 24px; z-index: 1200; min-height: 42px; display: inline-flex; align-items: center; gap: 9px; padding: 0 15px; border: 1px solid rgba(255,255,255,.15); border-radius: 999px; background: rgba(6,24,45,.92); color: #fff; box-shadow: 0 12px 32px rgba(3,19,37,.2); font-size: 9px; font-weight: 800; letter-spacing: .12em; cursor: pointer; backdrop-filter: blur(12px); transition: background .25s, border-color .25s, transform .25s, box-shadow .25s; }
 .sound-toggle:hover { transform: translateY(-2px); background: var(--blue-800); box-shadow: 0 16px 38px rgba(3,19,37,.25); }
@@ -741,7 +747,8 @@ main > section:nth-of-type(even) .reveal { --reveal-x: 58px; }
     .footer-inner { grid-template-columns: 1fr; gap: 26px; }
     .footer-links { row-gap: 10px; }
     .footer-details { align-items: flex-start; flex-direction: column; gap: 22px; }
-    .footer-bottom { flex-direction: column; gap: 12px; }
+    .footer-bottom { flex-direction: column; gap: 16px; }
+    .footer-bottom-actions { width: 100%; align-items: flex-end; justify-content: space-between; }
     .sound-toggle { right: 16px; bottom: 16px; min-height: 40px; padding: 0 13px; }
     .floating-inquiry { right: 16px; bottom: 70px; width: 47px; height: 47px; }
 }
