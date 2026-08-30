@@ -8,11 +8,11 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&amp;family=Nanum+Pen+Script&amp;family=Noto+Sans+KR:wght@400;500;600;700;800;900&amp;display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="style.css?v=20260830-8">
+    <link rel="stylesheet" href="style.css?v=20260830-9">
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2" defer></script>
     <script src="https://cdn.jsdelivr.net/npm/qrcode-generator@2.0.4/dist/qrcode.js" defer></script>
     <script src="../supabase-client.js?v=20260830-4" defer></script>
-    <script src="script.js?v=20260830-7" defer></script>
+    <script src="script.js?v=20260830-8" defer></script>
     <script src="auth.js?v=20260830-5" defer></script>
 </head>
 <body>
@@ -20,7 +20,7 @@
 
     <header class="site-header" id="site-header">
         <div class="shell header-inner">
-            <a class="brand" href="#home" aria-label="L2K EDU 홈">
+            <a class="brand" id="main-logo" href="index.html" aria-label="L2K EDU 홈페이지 새로고침">
                 <span class="brand-mark"><img src="5_L2K_Edu_로고_1.png" alt=""></span>
                 <span class="brand-name">L2K <strong>EDU</strong></span>
             </a>
@@ -165,7 +165,7 @@
                     <div class="ceo-signoff">
                         <span>L2K EDU 대표이사</span>
                         <strong>김지수</strong>
-                        <em aria-label="김지수 이름을 표현한 장식형 서명">김지수</em>
+                        <img class="ceo-signature-image" src="kim-jisu-signature.png" alt="김지수 대표이사 서명">
                     </div>
                 </div>
             </div>
@@ -417,6 +417,13 @@
     </div>
     <div class="auth-toast" id="auth-toast" role="status" aria-live="polite" hidden></div>
 
+    <button class="cursor-inquiry" id="cursor-inquiry" type="button" aria-label="문의 양식으로 이동">
+        <span>문의하기</span><i aria-hidden="true">↗</i>
+    </button>
+    <button class="sound-toggle" id="sound-toggle" type="button" aria-pressed="false" aria-label="배경 음악 켜기">
+        <span class="sound-bars" aria-hidden="true"><i></i><i></i><i></i></span><strong>음악</strong>
+    </button>
+
     <footer class="site-footer">
         <div class="shell footer-top">
             <a class="brand brand-footer" href="#home"><span class="brand-mark"><img src="5_L2K_Edu_로고_1.png" alt=""></span><span class="brand-name">L2K <strong>EDU</strong></span></a>
@@ -429,6 +436,13 @@
                 <p>© <span id="current-year"></span> L2K EDU.</p>
             </div>
             <div class="footer-utility">
+                <label class="family-site" for="family-site-select">
+                    <span>FAMILY SITE</span>
+                    <select id="family-site-select" aria-label="패밀리 사이트 선택">
+                        <option value="">+++Quick Link+++</option>
+                        <option value="https://www.myeducation.kr/">MY EDUCATION</option>
+                    </select>
+                </label>
                 <a class="footer-mobile-access" id="l2k-mobile-access-link" href="https://myedu-website.vercel.app/l2k-edu/index.html" aria-label="모바일에서 L2K EDU 홈페이지 접속">
                     <img id="l2k-mobile-qr" alt="L2K EDU 홈페이지 접속 QR코드" width="76" height="76">
                     <span><strong>MOBILE ACCESS</strong><small>QR 코드로 접속하세요</small></span>
