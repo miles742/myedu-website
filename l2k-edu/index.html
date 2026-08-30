@@ -8,11 +8,11 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&amp;family=Nanum+Pen+Script&amp;family=Noto+Sans+KR:wght@400;500;600;700;800;900&amp;display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="style.css?v=20260830-9">
+    <link rel="stylesheet" href="style.css?v=20260830-10">
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2" defer></script>
     <script src="https://cdn.jsdelivr.net/npm/qrcode-generator@2.0.4/dist/qrcode.js" defer></script>
     <script src="../supabase-client.js?v=20260830-4" defer></script>
-    <script src="script.js?v=20260830-8" defer></script>
+    <script src="script.js?v=20260830-9" defer></script>
     <script src="auth.js?v=20260830-5" defer></script>
 </head>
 <body>
@@ -165,7 +165,7 @@
                     <div class="ceo-signoff">
                         <span>L2K EDU 대표이사</span>
                         <strong>김지수</strong>
-                        <img class="ceo-signature-image" src="kim-jisu-signature.png" alt="김지수 대표이사 서명">
+                        <em class="ceo-signature" aria-label="김지수 이름을 표현한 장식형 서명">김지수</em>
                     </div>
                 </div>
             </div>
@@ -418,10 +418,10 @@
     <div class="auth-toast" id="auth-toast" role="status" aria-live="polite" hidden></div>
 
     <button class="cursor-inquiry" id="cursor-inquiry" type="button" aria-label="문의 양식으로 이동">
-        <span>문의하기</span><i aria-hidden="true">↗</i>
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7.2 3.5 9.8 7.8 7.9 9.4c1.2 2.6 3.1 4.5 5.7 5.7l1.6-1.9 4.3 2.6-.8 3.7c-.2.8-.9 1.3-1.7 1.3C9.4 20.8 3.2 14.6 3.2 7c0-.8.5-1.5 1.3-1.7l2.7-.8Z"/></svg>
     </button>
     <button class="sound-toggle" id="sound-toggle" type="button" aria-pressed="false" aria-label="배경 음악 켜기">
-        <span class="sound-bars" aria-hidden="true"><i></i><i></i><i></i></span><strong>음악</strong>
+        <span class="sound-bars" aria-hidden="true"><i></i><i></i><i></i></span><strong>MUSIC</strong>
     </button>
 
     <footer class="site-footer">

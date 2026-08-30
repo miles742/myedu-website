@@ -92,8 +92,8 @@ if (cursorInquiry && window.matchMedia("(pointer: fine)").matches) {
     let cursorPaused = false;
 
     document.addEventListener("pointermove", (event) => {
-        targetX = Math.min(window.innerWidth - 116, Math.max(12, event.clientX + 20));
-        targetY = Math.min(window.innerHeight - 60, Math.max(12, event.clientY + 20));
+        targetX = Math.min(window.innerWidth - 72, Math.max(12, event.clientX + 18));
+        targetY = Math.min(window.innerHeight - 72, Math.max(12, event.clientY + 18));
         cursorInquiry.classList.add("active");
     }, { passive: true });
 
@@ -152,7 +152,7 @@ soundToggle?.addEventListener("click", async () => {
         ambientMaster.gain.linearRampToValueAtTime(turningOn ? .75 : 0, ambientContext.currentTime + .35);
         soundToggle.setAttribute("aria-pressed", String(turningOn));
         soundToggle.setAttribute("aria-label", turningOn ? "배경 음악 끄기" : "배경 음악 켜기");
-        soundToggle.querySelector("strong").textContent = turningOn ? "끄기" : "음악";
+        soundToggle.querySelector("strong").textContent = "MUSIC";
     } catch (error) {
         window.showL2kAuthToast?.(error.message);
     }
