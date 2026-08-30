@@ -36,6 +36,19 @@ const teamProfiles = [
             "HSK 4급 보유",
             "TOEIC 865점 보유"
         ]
+    },
+    {
+        name: "김지수",
+        role: "팀장",
+        photo: "images/profiles/kim-jisu.png",
+        careers: [
+            "숭실대학교 졸업",
+            "컴퓨터 활용 자격증 1급 보유",
+            "TOEIC 810점 보유",
+            "안전지도사 1급",
+            "심리상담치료사 1급",
+            "다수의 대학 몰입 과정 참여 경력"
+        ]
     }
 ];
 
