@@ -148,8 +148,9 @@ img { display: block; max-width: 100%; }
 .ceo-signoff { position: relative; width: fit-content; display: grid; grid-template-columns: auto auto; align-items: end; gap: 5px 15px; margin: 50px 0 0 auto; padding-right: 100px; }
 .ceo-signoff span { grid-column: 1 / -1; color: #a99876; font-size: 11px; }
 .ceo-signoff strong { font-size: 19px; letter-spacing: .08em; }
-.ceo-signature { position: absolute; right: -8px; bottom: -17px; min-width: 112px; color: var(--cyan); font-family: "Nanum Pen Script", cursive; font-size: 58px; font-style: normal; font-weight: 400; line-height: .82; letter-spacing: -.15em; text-align: center; transform: rotate(-8deg) skewX(-8deg); }
-.ceo-signature::after { content: ""; position: absolute; left: 7px; right: -5px; bottom: -7px; height: 2px; border-radius: 50%; background: currentColor; opacity: .72; transform: rotate(-4deg); }
+.ceo-signature { position: absolute; right: -34px; bottom: -26px; min-width: 160px; padding-right: 26px; color: var(--cyan); font-family: "East Sea Dokdo", cursive; font-size: 72px; font-style: normal; font-weight: 400; line-height: .78; letter-spacing: -.09em; text-align: left; white-space: nowrap; transform: rotate(-7deg) skewX(-5deg); transform-origin: left center; }
+.ceo-signature::before { content: ""; position: absolute; left: 5px; bottom: -10px; width: 150px; height: 25px; border-top: 2px solid currentColor; border-radius: 50%; opacity: .88; transform: rotate(-5deg) skewX(-28deg); }
+.ceo-signature::after { content: ""; position: absolute; left: 70px; bottom: -17px; width: 112px; height: 22px; border-top: 1px solid currentColor; border-radius: 50%; opacity: .5; transform: rotate(8deg) skewX(-35deg); }
 
 .organization { position: relative; overflow: hidden; background: linear-gradient(145deg, #fffdf8, #f3ecdc 72%, #ead8ad); }
 .organization::before { content: "L2K"; position: absolute; right: -30px; top: 10px; color: rgba(183,137,47,.055); font-family: Manrope, sans-serif; font-size: clamp(180px, 28vw, 420px); font-weight: 800; line-height: 1; pointer-events: none; }
