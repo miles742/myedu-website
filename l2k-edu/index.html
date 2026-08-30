@@ -8,10 +8,11 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&amp;family=Noto+Sans+KR:wght@400;500;600;700;800;900&amp;display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="style.css?v=20260830-6">
+    <link rel="stylesheet" href="style.css?v=20260830-7">
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/qrcode-generator@2.0.4/dist/qrcode.js" defer></script>
     <script src="../supabase-client.js?v=20260830-4" defer></script>
-    <script src="script.js?v=20260830-4" defer></script>
+    <script src="script.js?v=20260830-7" defer></script>
     <script src="auth.js?v=20260830-4" defer></script>
 </head>
 <body>
@@ -206,6 +207,19 @@
                             </div>
                         </article>
                     </div>
+
+                    <article class="branch-office">
+                        <div class="branch-avatar" aria-hidden="true">
+                            <span>VN</span>
+                            <svg viewBox="0 0 64 64"><path d="M7 23 32 11l25 12-25 12L7 23Z"/><path d="M16 29v13c0 5 7 10 16 10s16-5 16-10V29L32 37 16 29Z"/></svg>
+                        </div>
+                        <div class="branch-office-content">
+                            <p>VIETNAM BRANCH</p>
+                            <h3>응옥반 <span>(녹반) 선생님</span></h3>
+                            <strong>베트남 유학생 유치</strong>
+                            <small>베트남 현지 학생 상담과 홍보·유치 활동을 담당합니다.</small>
+                        </div>
+                    </article>
                 </div>
             </div>
         </section>
@@ -366,9 +380,17 @@
             <nav aria-label="하단 메뉴"><a href="#about">ABOUT</a><a href="#services">BUSINESS</a><a href="#contact">CONTACT</a></nav>
         </div>
         <div class="shell footer-bottom">
-            <p><span>L2K EDU</span> · 대표이사 김지수 · 사업자등록번호 157-86-03229 · 연락처 010-2226-2461 · 주소 서울특별시 관악구 신림로 3길 40, 7동 1504호</p>
-            <p>© <span id="current-year"></span> L2K EDU.</p>
-            <a href="#home">BACK TO TOP ↑</a>
+            <div class="footer-legal">
+                <p><span>L2K EDU</span> · 대표이사 김지수 · 사업자등록번호 157-86-03229 · 연락처 010-2226-2461 · 주소 서울특별시 관악구 신림로 3길 40, 7동 1504호</p>
+                <p>© <span id="current-year"></span> L2K EDU.</p>
+            </div>
+            <div class="footer-utility">
+                <a class="footer-mobile-access" id="l2k-mobile-access-link" href="https://myedu-website.vercel.app/l2k-edu/index.html" aria-label="모바일에서 L2K EDU 홈페이지 접속">
+                    <img id="l2k-mobile-qr" alt="L2K EDU 홈페이지 접속 QR코드" width="76" height="76">
+                    <span><strong>MOBILE ACCESS</strong><small>QR 코드로 접속하세요</small></span>
+                </a>
+                <a class="footer-back-top" href="#home">BACK TO TOP ↑</a>
+            </div>
         </div>
     </footer>
 </body>

@@ -47,3 +47,15 @@ contactForm?.addEventListener("submit", (event) => {
 });
 
 document.getElementById("current-year").textContent = new Date().getFullYear();
+
+const l2kMobileUrl = "https://myedu-website.vercel.app/l2k-edu/index.html";
+const l2kMobileAccessLink = document.getElementById("l2k-mobile-access-link");
+const l2kMobileQr = document.getElementById("l2k-mobile-qr");
+
+if (l2kMobileAccessLink) l2kMobileAccessLink.href = l2kMobileUrl;
+if (l2kMobileQr && window.qrcode) {
+    const qrCode = window.qrcode(0, "M");
+    qrCode.addData(l2kMobileUrl);
+    qrCode.make();
+    l2kMobileQr.src = qrCode.createDataURL(5, 2);
+}
