@@ -35,7 +35,7 @@ img { display: block; max-width: 100%; }
 .brand-mark img { width: 100%; height: 100%; object-fit: cover; transform: scale(1.34); }
 .brand-name { font-family: Manrope, sans-serif; font-size: 25px; font-weight: 800; letter-spacing: -.045em; }
 .brand-name strong { color: var(--blue); }
-.primary-nav { display: flex; align-items: center; gap: 34px; }
+.primary-nav { display: flex; align-items: center; gap: 27px; }
 .primary-nav a { font-family: Manrope, sans-serif; font-size: 11px; font-weight: 800; letter-spacing: .08em; }
 .primary-nav a:not(.nav-contact) { position: relative; }
 .primary-nav a:not(.nav-contact)::after { content: ""; position: absolute; left: 0; right: 100%; bottom: -8px; height: 2px; background: var(--blue); transition: right .25s; }
@@ -133,6 +133,31 @@ img { display: block; max-width: 100%; }
 .value-grid h3 { margin: 0 0 11px; font-family: Manrope, sans-serif; font-size: 24px; }
 .value-grid p { margin: 0; color: var(--muted); font-size: 14px; line-height: 1.8; word-break: keep-all; }
 
+.organization { position: relative; overflow: hidden; background: linear-gradient(145deg, #fffdf8, #f3ecdc 72%, #ead8ad); }
+.organization::before { content: "L2K"; position: absolute; right: -30px; top: 10px; color: rgba(183,137,47,.055); font-family: Manrope, sans-serif; font-size: clamp(180px, 28vw, 420px); font-weight: 800; line-height: 1; pointer-events: none; }
+.organization-heading { position: relative; display: grid; grid-template-columns: 1fr 430px; align-items: end; gap: 90px; }
+.organization-heading h2 { margin: 0; }
+.organization-heading > p:last-child { margin: 0 0 5px; color: var(--muted); font-size: 15px; line-height: 1.85; word-break: keep-all; }
+.organization-tree { position: relative; width: min(1120px, 100%); margin: 82px auto 0; }
+.executive-card { position: relative; display: grid; grid-template-columns: 205px minmax(0, 1fr); border: 1px solid rgba(113,83,30,.16); border-top: 3px solid var(--blue); border-radius: 24px; background: rgba(255,255,255,.92); box-shadow: 0 24px 65px rgba(63,43,10,.1); }
+.executive-card-ceo { width: min(820px, 100%); grid-template-columns: 285px minmax(0, 1fr); margin: 0 auto; }
+.executive-photo { min-height: 100%; overflow: hidden; border-radius: 21px 0 0 21px; background: #ece8df; }
+.executive-photo img { width: 100%; height: 100%; object-fit: cover; object-position: center top; }
+.executive-content { min-width: 0; padding: 31px 28px 34px; }
+.executive-role { margin: 0 0 5px; color: var(--blue); font-family: Manrope, sans-serif; font-size: 9px; font-weight: 800; letter-spacing: .13em; }
+.executive-content h3 { margin: 0; font-size: 32px; line-height: 1.25; letter-spacing: -.05em; }
+.executive-content h3 span { margin-left: 5px; color: var(--muted); font-size: 15px; font-weight: 700; letter-spacing: -.02em; }
+.executive-profile-label { margin: 22px 0 13px; padding-top: 16px; border-top: 1px solid var(--line); color: var(--blue); font-family: Manrope, sans-serif; font-size: 9px; font-weight: 800; letter-spacing: .15em; }
+.executive-content ul { display: grid; gap: 7px; margin: 0; padding: 0; color: var(--muted); font-size: 12px; line-height: 1.55; list-style: none; }
+.executive-card-ceo ul { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 7px 22px; }
+.executive-content li { position: relative; padding-left: 13px; word-break: keep-all; }
+.executive-content li::before { content: ""; position: absolute; left: 0; top: .68em; width: 4px; height: 4px; border-radius: 50%; background: var(--blue); }
+.organization-branch { position: relative; height: 70px; }
+.organization-branch::before { content: ""; position: absolute; left: 50%; top: 0; width: 1px; height: 35px; background: rgba(155,111,32,.5); }
+.organization-branch::after { content: ""; position: absolute; left: 25%; right: 25%; top: 35px; height: 1px; background: rgba(155,111,32,.5); }
+.executive-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 24px; }
+.executive-grid .executive-card::before { content: ""; position: absolute; left: 50%; bottom: 100%; width: 1px; height: 35px; background: rgba(155,111,32,.5); }
+
 .services { position: relative; overflow: hidden; background: var(--ink); color: #fff; }
 .services::before { content: "L2K"; position: absolute; right: -30px; top: -130px; color: rgba(255,255,255,.025); font-family: Manrope, sans-serif; font-size: clamp(250px, 34vw, 520px); font-weight: 800; line-height: 1; pointer-events: none; }
 .section-heading-light { position: relative; z-index: 1; }
@@ -148,6 +173,9 @@ img { display: block; max-width: 100%; }
 .service-copy span { color: #b9ad96; font-size: 13px; line-height: 1.7; word-break: keep-all; }
 .service-symbol { color: rgba(255,255,255,.08); font-family: Manrope, sans-serif; font-size: 72px; font-weight: 800; text-align: right; transition: color .3s; }
 .service-card:hover .service-symbol { color: var(--lime); }
+.service-symbol-cap { display: flex; align-items: center; justify-content: flex-end; }
+.service-symbol-cap svg { width: 74px; height: 74px; fill: currentColor; }
+.service-symbol-cap svg path:nth-child(2) { fill: none; stroke: currentColor; stroke-width: 3; stroke-linecap: round; }
 
 .process { background: #fff; }
 .process-head { display: grid; grid-template-columns: .6fr 1fr .8fr; align-items: end; gap: 60px; }
@@ -275,6 +303,9 @@ img { display: block; max-width: 100%; }
     .hero-foot { bottom: 20px; }
     .section { padding: 100px 0; }
     .section-heading, .contact-grid { grid-template-columns: 1fr; gap: 38px; }
+    .organization-heading { grid-template-columns: 1fr; gap: 28px; }
+    .executive-card:not(.executive-card-ceo) { grid-template-columns: 1fr; }
+    .executive-card:not(.executive-card-ceo) .executive-photo { min-height: 320px; border-radius: 21px 21px 0 0; }
     .section-intro { max-width: 650px; }
     .service-copy { grid-template-columns: .7fr 1.3fr; }
     .service-copy span { grid-column: 2; }
@@ -316,6 +347,13 @@ img { display: block; max-width: 100%; }
     .value-grid article { min-height: 245px; border-right: 0; border-bottom: 1px solid var(--line); }
     .value-grid article:last-child { border-bottom: 0; }
     .value-icon { margin: 30px 0 20px; }
+    .organization-tree { margin-top: 55px; }
+    .executive-card-ceo, .executive-grid { grid-template-columns: 1fr; }
+    .executive-photo, .executive-card-ceo .executive-photo { min-height: 350px; border-radius: 21px 21px 0 0; }
+    .executive-card-ceo ul { grid-template-columns: 1fr; }
+    .organization-branch { display: none; }
+    .executive-grid { gap: 18px; margin-top: 18px; }
+    .executive-grid .executive-card::before { display: none; }
     .service-card { grid-template-columns: 42px 1fr; gap: 14px; padding: 28px 0; }
     .service-card:hover { padding: 28px 12px; }
     .service-copy { grid-template-columns: 1fr; gap: 7px; }
