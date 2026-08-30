@@ -7,13 +7,13 @@
     <title>L2K EDU | 글로벌 유학생 유치 전문 파트너</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&amp;family=Noto+Sans+KR:wght@400;500;600;700;800;900&amp;display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="style.css?v=20260830-7">
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&amp;family=Nanum+Pen+Script&amp;family=Noto+Sans+KR:wght@400;500;600;700;800;900&amp;display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css?v=20260830-8">
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2" defer></script>
     <script src="https://cdn.jsdelivr.net/npm/qrcode-generator@2.0.4/dist/qrcode.js" defer></script>
     <script src="../supabase-client.js?v=20260830-4" defer></script>
     <script src="script.js?v=20260830-7" defer></script>
-    <script src="auth.js?v=20260830-4" defer></script>
+    <script src="auth.js?v=20260830-5" defer></script>
 </head>
 <body>
     <a class="skip-link" href="#main">본문 바로가기</a>
@@ -31,10 +31,10 @@
 
             <nav class="primary-nav" id="primary-nav" aria-label="주요 메뉴">
                 <a href="#about">ABOUT</a>
+                <a href="#ceo-message">CEO</a>
                 <a href="#organization">TEAM</a>
                 <a href="#services">BUSINESS</a>
-                <a href="#process">PROCESS</a>
-                <a href="#insight">INSIGHT</a>
+                <a href="#faq">FAQ</a>
                 <a class="nav-contact" href="#contact">CONTACT <span aria-hidden="true">↗</span></a>
                 <button class="auth-nav-button" id="auth-open-button" type="button">로그인</button>
                 <div class="user-menu" id="user-menu" hidden>
@@ -44,6 +44,7 @@
                     </button>
                     <div class="user-menu-panel" id="user-menu-panel" hidden>
                         <span id="user-email"></span>
+                        <a class="user-mypage-link" href="mypage.html">마이페이지</a>
                         <button id="logout-button" type="button">로그아웃</button>
                     </div>
                 </div>
@@ -146,10 +147,34 @@
             </div>
         </section>
 
+        <section class="section ceo-message" id="ceo-message">
+            <div class="shell ceo-message-grid">
+                <figure class="ceo-message-portrait reveal">
+                    <img src="kim-jisu-fullbody.png" alt="김지수 대표이사 전신 사진">
+                    <figcaption>L2K EDU · CHIEF EXECUTIVE OFFICER</figcaption>
+                </figure>
+                <div class="ceo-message-copy reveal reveal-delay">
+                    <p class="section-label">02 / CEO MESSAGE</p>
+                    <h2>세계의 인재가<br>더 큰 미래를 시작하도록.</h2>
+                    <div class="ceo-letter">
+                        <p>안녕하세요. L2K EDU 대표이사 김지수입니다.</p>
+                        <p>교육은 국경을 넘어 사람과 사람, 가능성과 기회를 연결하는 가장 강력한 힘이라고 믿습니다.</p>
+                        <p>L2K EDU는 세계 각국의 우수한 인재가 한국의 대학에서 새로운 배움과 미래를 시작할 수 있도록 학생 발굴부터 대학 연계, 입학과 정착까지 모든 과정을 책임 있게 함께합니다.</p>
+                        <p>학생에게는 더 넓은 가능성을, 대학에는 지속 가능한 국제화의 길을 제공하는 신뢰받는 파트너가 되겠습니다. 감사합니다.</p>
+                    </div>
+                    <div class="ceo-signoff">
+                        <span>L2K EDU 대표이사</span>
+                        <strong>김지수</strong>
+                        <em aria-label="김지수 이름을 표현한 장식형 서명">김지수</em>
+                    </div>
+                </div>
+            </div>
+        </section>
+
         <section class="section organization" id="organization">
             <div class="shell">
                 <div class="organization-heading reveal">
-                    <p class="section-label">02 / ORGANIZATION</p>
+                    <p class="section-label">03 / ORGANIZATION</p>
                     <h2>글로벌 교육의 미래를<br>함께 연결하는 사람들.</h2>
                     <p>현지 인재 발굴부터 대학 연계와 안정적인 정착까지, 각 분야의 경험을 갖춘 경영진이 책임 있게 이끕니다.</p>
                 </div>
@@ -228,7 +253,7 @@
             <div class="shell">
                 <div class="section-heading section-heading-light reveal">
                     <div>
-                        <p class="section-label">03 / WHAT WE DO</p>
+                        <p class="section-label">04 / WHAT WE DO</p>
                         <h2>대학교에 맞는 글로벌 인재를<br>체계적으로 연결합니다.</h2>
                     </div>
                     <p class="section-intro">해외 학생 발굴부터 대학 연계와 입학 지원까지 유학생 유치의 전 과정을 함께합니다.</p>
@@ -262,7 +287,7 @@
         <section class="section process" id="process">
             <div class="shell">
                 <div class="process-head reveal">
-                    <p class="section-label">04 / HOW WE WORK</p>
+                    <p class="section-label">05 / HOW WE WORK</p>
                     <h2>신뢰할 수 있는 유치는<br>정확한 과정에서 시작됩니다.</h2>
                     <p>대학의 요구를 이해하고, 인재를 발굴해, 입학까지 연결합니다.</p>
                 </div>
@@ -279,7 +304,7 @@
         <section class="section insight" id="insight">
             <div class="shell insight-grid">
                 <div class="insight-copy reveal">
-                    <p class="section-label">05 / OUR PERSPECTIVE</p>
+                    <p class="section-label">06 / OUR PERSPECTIVE</p>
                     <h2>Global to<br>Korea.</h2>
                     <p>세계의 가능성 있는 학생이 한국의 우수한 대학교에서 새로운 미래를 시작할 수 있도록 가장 신뢰할 수 있는 길을 만듭니다.</p>
                 </div>
@@ -291,10 +316,29 @@
             </div>
         </section>
 
+        <section class="section faq" id="faq">
+            <div class="shell faq-grid">
+                <div class="faq-heading reveal">
+                    <p class="section-label">07 / FAQ</p>
+                    <h2>자주 묻는 질문을<br>확인해 보세요.</h2>
+                    <p>더 자세한 안내가 필요하시면 문의 내용을 남겨 주세요. 사업 목표에 맞춰 상담해 드립니다.</p>
+                    <a href="#contact">별도 문의하기 <span aria-hidden="true">↗</span></a>
+                </div>
+                <div class="faq-list reveal reveal-delay">
+                    <details open><summary><span>01</span>어느 국가의 유학생을 모집할 수 있나요?</summary><div><p>L2K EDU는 특정 국가에 한정하지 않고 세계 각국의 파트너 네트워크를 활용합니다. 대학의 전공, 모집 인원과 선발 기준에 맞춰 대상 국가와 홍보 전략을 협의합니다.</p></div></details>
+                    <details><summary><span>02</span>어떤 업무까지 지원하나요?</summary><div><p>현지 학생 발굴과 홍보, 대학 매칭, 지원 서류 안내, 입학 과정 지원 및 한국 도착 후 초기 정착 안내까지 단계별로 지원합니다.</p></div></details>
+                    <details><summary><span>03</span>해외 현지 홍보는 얼마나 자주 진행하나요?</summary><div><p>원칙적으로 연 2회 이상 현지를 방문해 홍보와 유치 활동을 진행하며, 대학의 모집 일정과 현지 상황에 따라 방문 횟수를 확대할 수 있습니다.</p></div></details>
+                    <details><summary><span>04</span>대학별 맞춤 모집 전략도 가능한가요?</summary><div><p>가능합니다. 희망 전공, 모집 규모, 선발 일정과 기준을 먼저 확인한 뒤 대학에 적합한 국가와 채널을 조합해 모집 방향을 설계합니다.</p></div></details>
+                    <details><summary><span>05</span>학생의 자격과 서류는 어떻게 확인하나요?</summary><div><p>대학의 입학 기준과 관련 지침에 맞춰 필요한 자료를 안내하고, 학생 및 현지 파트너와 투명하게 소통하며 제출 과정을 지원합니다.</p></div></details>
+                    <details><summary><span>06</span>협력 상담은 어떻게 시작하나요?</summary><div><p>하단 문의 양식에 대학·기관명과 모집 목표를 남겨 주시면 담당자가 내용을 확인한 후 상담 일정을 안내합니다.</p></div></details>
+                </div>
+            </div>
+        </section>
+
         <section class="section contact" id="contact">
             <div class="shell contact-grid">
                 <div class="contact-copy reveal">
-                    <p class="section-label">06 / CONTACT</p>
+                    <p class="section-label">08 / CONTACT</p>
                     <h2>외국인 유학생 유치에 대해<br>이야기해 주세요.</h2>
                     <p>대학교의 모집 목표와 필요한 지원 내용을 남겨주시면 확인 후 연락드리겠습니다.</p>
                     <div class="contact-meta">
@@ -377,7 +421,7 @@
         <div class="shell footer-top">
             <a class="brand brand-footer" href="#home"><span class="brand-mark"><img src="5_L2K_Edu_로고_1.png" alt=""></span><span class="brand-name">L2K <strong>EDU</strong></span></a>
             <p>Connecting universities with global talent.</p>
-            <nav aria-label="하단 메뉴"><a href="#about">ABOUT</a><a href="#services">BUSINESS</a><a href="#contact">CONTACT</a></nav>
+            <nav aria-label="하단 메뉴"><a href="#about">ABOUT</a><a href="#ceo-message">CEO</a><a href="#services">BUSINESS</a><a href="#faq">FAQ</a><a href="#contact">CONTACT</a></nav>
         </div>
         <div class="shell footer-bottom">
             <div class="footer-legal">

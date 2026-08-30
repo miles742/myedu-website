@@ -253,6 +253,11 @@ if (window.myEducationSupabase) {
     .then((user) => {
         renderL2kAuthState(user);
         const url = new URL(window.location.href);
+        if (url.searchParams.get("account") === "deleted") {
+            showL2kAuthToast("회원 탈퇴가 완료되었습니다.");
+            url.searchParams.delete("account");
+            window.history.replaceState({}, "", `${url.pathname}${url.search}${url.hash}`);
+        }
         if (!user && url.searchParams.get("auth") === "login") {
             openL2kAuthModal("login");
             url.searchParams.delete("auth");

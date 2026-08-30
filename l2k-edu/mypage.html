@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="ko">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="L2K EDU 회원정보와 프로필 사진을 관리하는 마이페이지입니다.">
+    <title>마이페이지 | L2K EDU</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@600;700;800&amp;family=Noto+Sans+KR:wght@400;500;600;700;800;900&amp;display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="mypage.css?v=20260830-1">
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2" defer></script>
+    <script src="../supabase-client.js?v=20260830-4" defer></script>
+    <script src="mypage.js?v=20260830-1" defer></script>
+</head>
+<body>
+    <a class="skip-link" href="#mypage-main">본문 바로가기</a>
+    <header class="mypage-header">
+        <div class="mypage-header-inner">
+            <a class="mypage-logo" href="index.html" aria-label="L2K EDU 홈으로 이동">
+                <img src="5_L2K_Edu_로고_1.png" alt="L2K EDU">
+                <strong>L2K <span>EDU</span></strong>
+            </a>
+            <div class="mypage-header-actions"><a href="index.html">홈으로</a><button id="mypage-logout" type="button">로그아웃</button></div>
+        </div>
+    </header>
+
+    <main class="mypage-main" id="mypage-main">
+        <section class="mypage-intro" aria-labelledby="mypage-title">
+            <p>L2K EDU MEMBER ACCOUNT</p>
+            <h1 id="mypage-title">마이페이지</h1>
+            <span>회원정보와 프로필 사진을 확인하고 변경할 수 있습니다.</span>
+        </section>
+
+        <div class="mypage-layout" id="mypage-content" hidden>
+            <aside class="profile-photo-card" aria-labelledby="profile-photo-title">
+                <h2 id="profile-photo-title">프로필 사진</h2>
+                <div class="profile-photo" id="profile-photo"><img id="profile-photo-image" src="" alt="회원 프로필 사진" hidden><span id="profile-photo-fallback" aria-hidden="true">L</span></div>
+                <strong id="profile-photo-name">회원</strong><span id="profile-photo-email"></span>
+                <div class="profile-photo-actions">
+                    <label for="profile-photo-input">사진 선택</label><input id="profile-photo-input" type="file" accept="image/jpeg,image/png,image/webp" hidden>
+                    <button id="profile-photo-remove" type="button" hidden>사진 삭제</button>
+                </div>
+                <p>JPG, PNG, WEBP · 최대 5MB</p><p class="profile-photo-status" id="profile-photo-status" aria-live="polite"></p>
+            </aside>
+
+            <section class="profile-info-card" aria-labelledby="profile-info-title">
+                <div class="profile-info-heading"><div><p>PERSONAL INFORMATION</p><h2 id="profile-info-title">회원정보</h2></div><span>가입일 <time id="profile-created-at">-</time></span></div>
+                <form id="profile-form">
+                    <label><span>이름</span><input type="text" name="name" autocomplete="name" required minlength="2" maxlength="30"></label>
+                    <label><span>이메일</span><input type="email" name="email" autocomplete="email" required maxlength="254"><small>이메일 변경 시 새 주소로 전송되는 확인 절차를 완료해야 합니다.</small></label>
+                    <label><span>연락처</span><input type="tel" name="phone" autocomplete="tel" maxlength="20" pattern="[0-9+()\-\s]{0,20}" placeholder="010-0000-0000"></label>
+                    <button class="profile-save" type="submit">변경사항 저장</button><p class="profile-form-status" id="profile-form-status" aria-live="polite"></p>
+                </form>
+            </section>
+
+            <section class="account-danger-card" aria-labelledby="account-danger-title">
+                <div><p>ACCOUNT MANAGEMENT</p><h2 id="account-danger-title">회원 탈퇴</h2><span>탈퇴하면 계정과 프로필 사진이 삭제되며 복구할 수 없습니다.</span></div>
+                <button id="account-delete-open" type="button">회원 탈퇴</button>
+            </section>
+        </div>
+        <section class="mypage-loading" id="mypage-loading" aria-live="polite"><span></span><p>회원정보를 불러오고 있습니다.</p></section>
+    </main>
+
+    <div class="delete-account-modal" id="delete-account-modal" hidden>
+        <div class="delete-account-backdrop" data-delete-close></div>
+        <section class="delete-account-dialog" role="dialog" aria-modal="true" aria-labelledby="delete-account-title">
+            <button class="delete-account-close" type="button" aria-label="회원 탈퇴 창 닫기" data-delete-close></button>
+            <p>DELETE ACCOUNT</p><h2 id="delete-account-title">정말 탈퇴하시겠어요?</h2>
+            <p>회원정보와 프로필 사진을 영구 삭제합니다. 본인 확인을 위해 비밀번호와 아래 확인 문구를 입력해 주세요.</p>
+            <form id="delete-account-form">
+                <label><span>현재 비밀번호</span><input type="password" name="password" autocomplete="current-password" required minlength="8" maxlength="128"></label>
+                <label><span>확인 문구</span><input type="text" name="confirmation" autocomplete="off" required placeholder="회원탈퇴" aria-describedby="delete-confirm-hint"></label>
+                <small id="delete-confirm-hint"><strong>회원탈퇴</strong>를 정확히 입력해 주세요.</small>
+                <div class="delete-account-actions"><button type="button" data-delete-close>취소</button><button type="submit">계정 영구 삭제</button></div>
+                <p id="delete-account-status" aria-live="polite"></p>
+            </form>
+        </section>
+    </div>
+    <div class="mypage-toast" id="mypage-toast" role="status" aria-live="polite" hidden></div>
+</body>
+</html>

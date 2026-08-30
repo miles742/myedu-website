@@ -1,0 +1,101 @@
+:root { --ink: #251a09; --blue: #9b6f20; --blue-dark: #211a0d; --green: #b7892f; --green-light: #f7edcf; --muted: #746951; --line: #dfd3b8; --surface: #f7f2e7; }
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body { margin: 0; background: radial-gradient(circle at 8% 12%, rgba(114,175,134,.14), transparent 28%), var(--surface); color: var(--ink); font-family: "Noto Sans KR", sans-serif; }
+a { color: inherit; text-decoration: none; }
+button, input { font: inherit; }
+.skip-link { position: fixed; left: 16px; top: -60px; z-index: 100; padding: 12px 16px; border-radius: 6px; background: var(--blue-dark); color: #fff; }
+.skip-link:focus { top: 16px; }
+.mypage-header { position: sticky; top: 0; z-index: 20; border-bottom: 1px solid rgba(11,25,48,.08); background: rgba(255,255,255,.88); backdrop-filter: blur(18px); }
+.mypage-header-inner { width: min(1120px, calc(100% - 40px)); height: 82px; display: flex; align-items: center; justify-content: space-between; margin: auto; }
+.mypage-logo { display: flex; align-items: center; gap: 10px; }
+.mypage-logo img { display: block; width: 46px; height: 46px; object-fit: contain; }
+.mypage-logo strong { font-family: Manrope, sans-serif; font-size: 21px; letter-spacing: -.04em; }
+.mypage-logo strong span { color: var(--green); }
+.mypage-header-actions { display: flex; align-items: center; gap: 9px; }
+.mypage-header-actions a, .mypage-header-actions button { min-height: 42px; display: inline-flex; align-items: center; justify-content: center; padding: 0 17px; border: 1px solid var(--line); border-radius: 999px; background: #fff; color: var(--blue-dark); font-size: 12px; font-weight: 800; cursor: pointer; }
+.mypage-header-actions button { border-color: var(--blue-dark); background: var(--blue-dark); color: #fff; }
+.mypage-main { width: min(1120px, calc(100% - 40px)); margin: 0 auto; padding: 66px 0 90px; }
+.mypage-intro { margin-bottom: 34px; }
+.mypage-intro > p, .profile-info-heading p { margin: 0 0 7px; color: var(--green); font-size: 10px; font-weight: 900; letter-spacing: .16em; }
+.mypage-intro h1 { margin: 0 0 10px; font-size: clamp(36px, 5vw, 58px); letter-spacing: -.06em; }
+.mypage-intro > span { color: var(--muted); font-size: 14px; }
+.mypage-layout { display: grid; grid-template-columns: 330px minmax(0, 1fr); align-items: start; gap: 24px; }
+.mypage-layout[hidden], .mypage-toast[hidden] { display: none; }
+.profile-photo-card, .profile-info-card { border: 1px solid rgba(11,25,48,.09); border-radius: 20px; background: #fff; box-shadow: 0 22px 55px rgba(11,25,48,.08); }
+.profile-photo-card { display: flex; flex-direction: column; align-items: center; padding: 34px 28px; text-align: center; }
+.profile-photo-card h2 { align-self: flex-start; margin: 0 0 28px; font-size: 18px; }
+.profile-photo { width: 150px; height: 150px; display: grid; place-items: center; overflow: hidden; margin-bottom: 18px; border: 5px solid #fff; border-radius: 50%; background: linear-gradient(145deg, var(--green), #6aa67d); color: #fff; box-shadow: 0 18px 42px rgba(65,125,89,.24), 0 0 0 1px var(--line); font-size: 48px; font-weight: 900; }
+.profile-photo img { width: 100%; height: 100%; object-fit: cover; }
+.profile-photo img[hidden], .profile-photo span[hidden] { display: none; }
+.profile-photo-card > strong { font-size: 20px; }
+.profile-photo-card > span { max-width: 100%; overflow: hidden; margin-top: 4px; color: var(--muted); font-size: 12px; text-overflow: ellipsis; white-space: nowrap; }
+.profile-photo-actions { display: flex; gap: 8px; margin-top: 24px; }
+.profile-photo-actions label, .profile-photo-actions button { min-height: 40px; display: inline-flex; align-items: center; justify-content: center; padding: 0 15px; border: 0; border-radius: 8px; background: var(--blue-dark); color: #fff; font-size: 12px; font-weight: 800; cursor: pointer; }
+.profile-photo-actions button { background: #edf1f3; color: #526474; }
+.profile-photo-actions button[hidden] { display: none; }
+.profile-photo-card > p { margin: 12px 0 0; color: #8a98a6; font-size: 10px; }
+.profile-photo-card .profile-photo-status { min-height: 18px; margin-top: 8px; color: var(--green); font-size: 11px; font-weight: 700; }
+.profile-info-card { padding: 38px 42px 40px; }
+.profile-info-heading { display: flex; align-items: flex-end; justify-content: space-between; gap: 20px; padding-bottom: 25px; border-bottom: 1px solid var(--line); }
+.profile-info-heading h2 { margin: 0; font-size: 28px; letter-spacing: -.045em; }
+.profile-info-heading > span { color: var(--muted); font-size: 11px; }
+#profile-form { display: grid; gap: 20px; padding-top: 28px; }
+#profile-form label { display: grid; gap: 8px; }
+#profile-form label > span { color: #304257; font-size: 12px; font-weight: 800; }
+#profile-form input { width: 100%; height: 52px; padding: 0 15px; border: 1px solid #ccd7dd; border-radius: 8px; outline: 0; color: var(--ink); font-size: 14px; transition: border-color .2s, box-shadow .2s; }
+#profile-form input:focus { border-color: var(--blue); box-shadow: 0 0 0 3px rgba(17,59,97,.1); }
+#profile-form small { color: var(--muted); font-size: 10px; line-height: 1.6; }
+.profile-save { height: 52px; margin-top: 4px; border: 0; border-radius: 8px; background: var(--green); color: #fff; font-weight: 850; cursor: pointer; transition: transform .2s, background .2s; }
+.profile-save:hover { background: #316d49; transform: translateY(-1px); }
+.profile-save:disabled { opacity: .6; cursor: wait; transform: none; }
+.profile-form-status { min-height: 20px; margin: -3px 0 0; color: var(--green); font-size: 12px; font-weight: 700; text-align: center; }
+.profile-form-status.error, .profile-photo-status.error { color: #bd2d38; }
+.account-danger-card { grid-column: 2; display: flex; align-items: center; justify-content: space-between; gap: 24px; padding: 25px 30px; border: 1px solid #efd4d6; border-radius: 16px; background: #fffafa; }
+.account-danger-card p { margin: 0 0 5px; color: #aa3842; font-size: 9px; font-weight: 900; letter-spacing: .15em; }
+.account-danger-card h2 { margin: 0 0 5px; font-size: 18px; }
+.account-danger-card span { color: var(--muted); font-size: 11px; }
+.account-danger-card > button { flex: 0 0 auto; min-height: 42px; padding: 0 17px; border: 1px solid #d26a72; border-radius: 8px; background: #fff; color: #a82f39; font-size: 12px; font-weight: 850; cursor: pointer; }
+.account-danger-card > button:hover { background: #a82f39; color: #fff; }
+.delete-account-modal[hidden] { display: none; }
+.delete-account-modal { position: fixed; inset: 0; z-index: 100; display: grid; place-items: center; padding: 24px; opacity: 0; visibility: hidden; transition: opacity .2s, visibility .2s; }
+.delete-account-modal.open { opacity: 1; visibility: visible; }
+.delete-account-backdrop { position: absolute; inset: 0; background: rgba(3,19,37,.72); backdrop-filter: blur(8px); }
+.delete-account-dialog { position: relative; width: min(470px, 100%); max-height: calc(100vh - 48px); overflow-y: auto; padding: 38px 40px 34px; border-radius: 18px; background: #fff; box-shadow: 0 30px 90px rgba(3,19,37,.36); transform: translateY(15px); transition: transform .2s; }
+.delete-account-modal.open .delete-account-dialog { transform: translateY(0); }
+.delete-account-close { position: absolute; right: 18px; top: 18px; width: 36px; height: 36px; border: 1px solid var(--line); border-radius: 50%; background: #fff; cursor: pointer; }
+.delete-account-close::before, .delete-account-close::after { content: ""; position: absolute; left: 50%; top: 50%; width: 14px; height: 1px; background: var(--ink); transform: translate(-50%, -50%) rotate(45deg); }
+.delete-account-close::after { transform: translate(-50%, -50%) rotate(-45deg); }
+.delete-account-dialog > p:first-of-type { margin: 0 0 7px; color: #aa3842; font-size: 10px; font-weight: 900; letter-spacing: .16em; }
+.delete-account-dialog h2 { margin: 0; font-size: 27px; letter-spacing: -.045em; }
+.delete-account-dialog > p:last-of-type { margin: 12px 0 25px; color: var(--muted); font-size: 12px; line-height: 1.75; }
+#delete-account-form { display: grid; gap: 16px; }
+#delete-account-form label { display: grid; gap: 7px; }
+#delete-account-form label span { color: #304257; font-size: 12px; font-weight: 800; }
+#delete-account-form input { width: 100%; height: 49px; padding: 0 14px; border: 1px solid #ccd7dd; border-radius: 8px; outline: 0; font-size: 14px; }
+#delete-account-form input:focus { border-color: #b7434d; box-shadow: 0 0 0 3px rgba(183,67,77,.1); }
+#delete-account-form small { margin-top: -8px; color: var(--muted); font-size: 10px; }
+.delete-account-actions { display: grid; grid-template-columns: 1fr 1.35fr; gap: 9px; margin-top: 4px; }
+.delete-account-actions button { height: 48px; border: 1px solid var(--line); border-radius: 8px; background: #fff; color: var(--ink); font-weight: 800; cursor: pointer; }
+.delete-account-actions button[type="submit"] { border-color: #a82f39; background: #a82f39; color: #fff; }
+.delete-account-actions button:disabled { opacity: .6; cursor: wait; }
+#delete-account-status { min-height: 18px; margin: -3px 0 0; color: #bd2d38; font-size: 11px; font-weight: 700; text-align: center; }
+.mypage-loading { min-height: 300px; display: grid; place-items: center; align-content: center; gap: 14px; color: var(--muted); }
+.mypage-loading[hidden] { display: none; }
+.mypage-loading span { width: 34px; height: 34px; border: 3px solid #dce5e1; border-top-color: var(--green); border-radius: 50%; animation: spin .8s linear infinite; }
+.mypage-loading p { margin: 0; font-size: 13px; }
+.mypage-toast { position: fixed; right: 24px; bottom: 24px; z-index: 50; max-width: min(360px, calc(100% - 48px)); padding: 14px 18px; border-radius: 10px; background: var(--blue-dark); color: #fff; box-shadow: 0 16px 40px rgba(3,19,37,.25); font-size: 13px; font-weight: 750; }
+@keyframes spin { to { transform: rotate(360deg); } }
+@media (max-width: 760px) {
+    .mypage-header-inner, .mypage-main { width: min(100% - 28px, 1120px); }
+    .mypage-header-inner { height: 70px; }
+    .mypage-logo img { width: 40px; height: 40px; }
+    .mypage-logo strong { font-size: 18px; }
+    .mypage-header-actions a { display: none; }
+    .mypage-main { padding: 42px 0 65px; }
+    .mypage-layout { grid-template-columns: 1fr; }
+    .account-danger-card { grid-column: 1; align-items: flex-start; flex-direction: column; }
+    .delete-account-dialog { padding: 34px 22px 28px; }
+    .profile-info-card { padding: 30px 22px; }
+    .profile-info-heading { align-items: flex-start; flex-direction: column; }
+}
