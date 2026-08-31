@@ -50,7 +50,7 @@ img { display: block; max-width: 100%; }
 }
 
 .hero { position: relative; min-height: 820px; height: 100vh; overflow: hidden; background: #17130d; color: #fff; }
-.hero::before { content: ""; position: absolute; inset: 0; z-index: 1; background: linear-gradient(90deg, rgba(3,11,18,.92) 0%, rgba(3,11,18,.75) 37%, rgba(3,11,18,.24) 64%, rgba(3,11,18,.06) 100%), linear-gradient(to top, rgba(3,11,18,.48), transparent 48%); pointer-events: none; }
+.hero::before { content: ""; position: absolute; inset: 0; z-index: 1; background: linear-gradient(90deg, rgba(3,11,18,.72) 0%, rgba(3,11,18,.52) 37%, rgba(3,11,18,.16) 64%, rgba(3,11,18,.03) 100%), linear-gradient(to top, rgba(3,11,18,.3), transparent 48%); pointer-events: none; }
 .hero-slides, .hero-slide { position: absolute; inset: 0; }
 .hero-slides { z-index: 0; background: #17130d; }
 .hero-slide { opacity: 0; background-position: center; background-size: cover; animation: hero-slide-fade 30s ease-in-out infinite; will-change: opacity, transform; }
