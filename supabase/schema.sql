@@ -42,8 +42,12 @@ create table if not exists public.member_signup_events (
     user_id uuid primary key references auth.users(id) on delete cascade,
     email text not null check (char_length(email) <= 254),
     name text not null default '회원' check (char_length(name) between 1 and 100),
+    site text not null default 'myeducation' check (site in ('myeducation', 'l2k')),
     created_at timestamptz not null default now()
 );
+
+alter table public.member_signup_events
+    add column if not exists site text not null default 'myeducation';
 
 create index if not exists inquiries_created_at_idx on public.inquiries (created_at desc);
 create index if not exists instructor_applications_created_at_idx on public.instructor_applications (created_at desc);
@@ -87,11 +91,15 @@ set search_path = ''
 as $$
 begin
     if new.email is not null then
-        insert into public.member_signup_events (user_id, email, name)
+        insert into public.member_signup_events (user_id, email, name, site)
         values (
             new.id,
             lower(new.email),
-            coalesce(nullif(trim(new.raw_user_meta_data ->> 'name'), ''), '회원')
+            coalesce(nullif(trim(new.raw_user_meta_data ->> 'name'), ''), '회원'),
+            case
+                when new.raw_user_meta_data ->> 'signup_source' = 'l2k' then 'l2k'
+                else 'myeducation'
+            end
         )
         on conflict (user_id) do nothing;
     end if;

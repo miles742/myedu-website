@@ -60,11 +60,14 @@
     }
 
     async function signUp(name, email, password, phone = "") {
+        const signupSource = window.location.pathname.toLowerCase().includes("/l2k-edu/")
+            ? "l2k"
+            : "myeducation";
         const { data, error } = await client.auth.signUp({
             email,
             password,
             options: {
-                data: { name, phone: String(phone || "").trim() },
+                data: { name, phone: String(phone || "").trim(), signup_source: signupSource },
                 emailRedirectTo: getAuthCallbackUrl("signup")
             }
         });
