@@ -53,13 +53,15 @@ img { display: block; max-width: 100%; }
 .hero::before { content: ""; position: absolute; inset: 0; z-index: 1; background: linear-gradient(90deg, rgba(3,11,18,.92) 0%, rgba(3,11,18,.75) 37%, rgba(3,11,18,.24) 64%, rgba(3,11,18,.06) 100%), linear-gradient(to top, rgba(3,11,18,.48), transparent 48%); pointer-events: none; }
 .hero-slides, .hero-slide { position: absolute; inset: 0; }
 .hero-slides { z-index: 0; background: #17130d; }
-.hero-slide { opacity: 0; background-position: center; background-size: cover; animation: hero-slide-fade 18s ease-in-out infinite; will-change: opacity, transform; }
-.hero-slide-one { background-image: url("l2k-global-students-hero.png"); }
-.hero-slide-two { background-image: url("l2k-global-orientation-hero.png"); animation-delay: 6s; }
-.hero-slide-three { background-image: url("l2k-global-collaboration-hero.png"); animation-delay: 12s; }
+.hero-slide { opacity: 0; background-position: center; background-size: cover; animation: hero-slide-fade 30s ease-in-out infinite; will-change: opacity, transform; }
+.hero-slide-one { background-image: url("./asset/hero-photos/hero-01.jpg"); background-position: center 48%; }
+.hero-slide-two { background-image: url("./asset/hero-photos/hero-02.jpg"); animation-delay: 6s; }
+.hero-slide-three { background-image: url("./asset/hero-photos/hero-03.jpg"); animation-delay: 12s; }
+.hero-slide-four { background-image: url("./asset/hero-photos/hero-04.png"); background-position: center 44%; animation-delay: 18s; }
+.hero-slide-five { background-image: url("./asset/hero-photos/hero-05.jpg"); background-position: center 58%; animation-delay: 24s; }
 @keyframes hero-slide-fade {
-    0%, 28% { opacity: 1; transform: scale(1.04); }
-    36%, 94% { opacity: 0; transform: scale(1); }
+    0%, 16% { opacity: 1; transform: scale(1.04); }
+    22%, 94% { opacity: 0; transform: scale(1); }
     100% { opacity: 1; transform: scale(1.04); }
 }
 .hero-grid { position: absolute; inset: 0; z-index: 1; opacity: .2; background-image: linear-gradient(rgba(255,255,255,.05) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.05) 1px, transparent 1px); background-size: 72px 72px; mask-image: linear-gradient(to right, #000, transparent 70%); }
@@ -405,6 +407,11 @@ img { display: block; max-width: 100%; }
     .auth-dialog { padding: 36px 24px 28px; }
     .hero { min-height: 980px; }
     .hero-inner { min-height: 900px; padding-top: 105px; }
+    .hero-slide-one { background-position: 50% center; }
+    .hero-slide-two { background-position: 58% center; }
+    .hero-slide-three { background-position: 58% center; }
+    .hero-slide-four { background-position: 42% center; }
+    .hero-slide-five { background-position: 50% center; }
     .hero h1 { font-size: clamp(43px, 13vw, 62px); }
     .hero-description { font-size: 15px; }
     .hero-visual { width: min(94vw, 440px); }
