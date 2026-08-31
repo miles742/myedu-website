@@ -64,6 +64,7 @@ const mainLogo = document.getElementById("main-logo");
 const familySiteSelect = document.getElementById("family-site-select");
 const cursorInquiry = document.getElementById("cursor-inquiry");
 const soundToggle = document.getElementById("sound-toggle");
+const backgroundMusic = document.getElementById("background-music");
 
 mainLogo?.addEventListener("click", (event) => {
     event.preventDefault();
@@ -112,48 +113,58 @@ if (cursorInquiry && window.matchMedia("(pointer: fine)").matches) {
     window.requestAnimationFrame(followCursor);
 }
 
-let ambientContext = null;
-let ambientMaster = null;
-let ambientStarted = false;
+if (soundToggle && backgroundMusic) {
+    backgroundMusic.volume = .55;
 
-function createAmbientMusic() {
-    const AudioContext = window.AudioContext || window.webkitAudioContext;
-    if (!AudioContext) throw new Error("이 브라우저에서는 배경 음악을 지원하지 않습니다.");
-    ambientContext = new AudioContext();
-    ambientMaster = ambientContext.createGain();
-    ambientMaster.gain.value = 0;
-    ambientMaster.connect(ambientContext.destination);
+    function syncMusicButton() {
+        const isPlaying = !backgroundMusic.paused;
+        soundToggle.setAttribute("aria-pressed", String(isPlaying));
+        soundToggle.setAttribute("aria-label", isPlaying ? "배경 음악 끄기" : "배경 음악 켜기");
+    }
 
-    [130.81, 164.81, 196, 246.94].forEach((frequency, index) => {
-        const oscillator = ambientContext.createOscillator();
-        const toneGain = ambientContext.createGain();
-        oscillator.type = index % 2 ? "sine" : "triangle";
-        oscillator.frequency.value = frequency;
-        toneGain.gain.value = index === 0 ? .022 : .012;
-        oscillator.connect(toneGain).connect(ambientMaster);
-        oscillator.start();
+    function showMusicError() {
+        soundToggle.querySelector("strong").textContent = "RETRY";
+        soundToggle.setAttribute("title", "음악을 불러오지 못했습니다. 다시 눌러 주세요.");
+        window.showL2kAuthToast?.("음악을 재생할 수 없습니다. 다시 눌러 주세요.");
+    }
+
+    async function playMusic() {
+        try {
+            await backgroundMusic.play();
+            soundToggle.querySelector("strong").textContent = "MUSIC";
+            soundToggle.removeAttribute("title");
+        } catch (error) {
+            syncMusicButton();
+            throw error;
+        }
+    }
+
+    backgroundMusic.addEventListener("play", syncMusicButton);
+    backgroundMusic.addEventListener("pause", syncMusicButton);
+    backgroundMusic.addEventListener("error", showMusicError);
+
+    soundToggle.addEventListener("click", async () => {
+        if (!backgroundMusic.paused) {
+            backgroundMusic.pause();
+            return;
+        }
+        try {
+            await playMusic();
+        } catch (error) {
+            showMusicError();
+        }
     });
 
-    const pulse = ambientContext.createOscillator();
-    const pulseDepth = ambientContext.createGain();
-    pulse.frequency.value = .08;
-    pulseDepth.gain.value = .008;
-    pulse.connect(pulseDepth).connect(ambientMaster.gain);
-    pulse.start();
-    ambientStarted = true;
+    window.addEventListener("load", () => {
+        playMusic().catch(() => {
+            const startAfterInteraction = (event) => {
+                document.removeEventListener("pointerdown", startAfterInteraction);
+                document.removeEventListener("keydown", startAfterInteraction);
+                if (event.target.closest?.("#sound-toggle")) return;
+                playMusic().catch(showMusicError);
+            };
+            document.addEventListener("pointerdown", startAfterInteraction);
+            document.addEventListener("keydown", startAfterInteraction);
+        });
+    }, { once: true });
 }
-
-soundToggle?.addEventListener("click", async () => {
-    try {
-        if (!ambientStarted) createAmbientMusic();
-        await ambientContext.resume();
-        const turningOn = soundToggle.getAttribute("aria-pressed") !== "true";
-        ambientMaster.gain.cancelScheduledValues(ambientContext.currentTime);
-        ambientMaster.gain.linearRampToValueAtTime(turningOn ? .75 : 0, ambientContext.currentTime + .35);
-        soundToggle.setAttribute("aria-pressed", String(turningOn));
-        soundToggle.setAttribute("aria-label", turningOn ? "배경 음악 끄기" : "배경 음악 켜기");
-        soundToggle.querySelector("strong").textContent = "MUSIC";
-    } catch (error) {
-        window.showL2kAuthToast?.(error.message);
-    }
-});
