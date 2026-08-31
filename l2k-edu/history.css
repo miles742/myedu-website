@@ -62,6 +62,20 @@
 .history-community h2 + p { max-width: 610px; margin: 32px 0 0; color: var(--muted); font-size: 16px; line-height: 1.9; word-break: keep-all; }
 .history-community blockquote { margin: 50px 0 0; padding: 25px 0 25px 28px; border-left: 2px solid var(--blue); color: var(--blue); font-size: clamp(21px, 2.3vw, 32px); font-weight: 750; line-height: 1.6; letter-spacing: -.035em; }
 
+.history-student-life { padding: 140px 0; overflow: hidden; background: var(--paper); }
+.student-life-heading { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(320px, .9fr); align-items: end; gap: clamp(50px, 8vw, 120px); margin-bottom: 62px; }
+.student-life-heading h2 { margin: 24px 0 0; font-size: clamp(45px, 5vw, 70px); line-height: 1.2; letter-spacing: -.065em; word-break: keep-all; }
+.student-life-heading h2 em { color: var(--blue); font-style: normal; }
+.student-life-heading > p { margin: 0 0 7px; color: var(--muted); font-size: 15px; line-height: 1.9; word-break: keep-all; }
+.student-life-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 26px; }
+.student-life-card { position: relative; margin: 0; overflow: hidden; border: 1px solid rgba(183,137,47,.16); border-radius: 24px; background: #fff; box-shadow: 0 22px 58px rgba(78,55,14,.1); }
+.student-life-card img { width: 100%; aspect-ratio: 4 / 3; object-fit: cover; transition: transform .7s ease; }
+.student-life-card:hover img { transform: scale(1.025); }
+.student-life-card figcaption { display: grid; gap: 6px; padding: 28px 30px 31px; }
+.student-life-card figcaption span { color: var(--blue); font: 800 9px/1.4 Manrope, sans-serif; letter-spacing: .14em; }
+.student-life-card figcaption strong { font-size: 22px; letter-spacing: -.035em; }
+.student-life-card figcaption small { color: var(--muted); font-size: 13px; line-height: 1.7; word-break: keep-all; }
+
 .history-chapter-vietnam { background: #efe8d8; }
 .field-grid { display: grid; grid-template-columns: .82fr 1.18fr; gap: 28px; align-items: end; }
 .field-photo { position: relative; margin: 0; overflow: hidden; border-radius: 24px; background: #ddd; box-shadow: 0 25px 65px rgba(43,31,10,.13); }
@@ -111,6 +125,9 @@
     .chapter-heading > p { grid-column: auto; max-width: 680px; }
     .history-community { padding: 110px 0; }
     .history-community-grid { gap: 55px; }
+    .history-student-life { padding: 110px 0; }
+    .student-life-heading { grid-template-columns: 1fr; gap: 28px; }
+    .student-life-heading > p { max-width: 680px; }
 }
 
 @media (max-width: 680px) {
@@ -136,6 +153,12 @@
     .history-community figure { width: calc(100% - 18px); margin-left: 18px; }
     .history-community figure img { max-height: 620px; }
     .history-community blockquote { margin-top: 35px; }
+    .history-student-life { padding: 82px 0; }
+    .student-life-heading { margin-bottom: 42px; }
+    .student-life-heading h2 { font-size: clamp(40px, 12vw, 55px); }
+    .student-life-grid { grid-template-columns: 1fr; }
+    .student-life-card { border-radius: 18px; }
+    .student-life-card figcaption { padding: 23px 22px 26px; }
     .field-grid { grid-template-columns: 1fr; }
     .field-photo img, .field-photo-meeting img { height: 560px; }
     .history-film { padding: 90px 0 70px; }
