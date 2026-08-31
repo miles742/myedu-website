@@ -130,6 +130,8 @@ img { display: block; max-width: 100%; }
 .value-grid article:last-child { border-right: 0; }
 .value-number { color: #9d9178; font-family: Manrope, sans-serif; font-size: 10px; font-weight: 800; }
 .value-icon { width: 53px; height: 53px; display: grid; place-items: center; margin: 55px 0 26px; border-radius: 50%; background: #f7ebc9; color: var(--blue); font-size: 22px; }
+.value-icon svg { width: 29px; height: 29px; overflow: visible; fill: none; stroke: currentColor; stroke-width: 1.55; stroke-linecap: round; stroke-linejoin: round; }
+.value-icon-clover circle { fill: rgba(183,137,47,.09); }
 .value-grid article:nth-child(2) .value-icon { background: #f1dfaa; color: #8f681d; }
 .value-grid article:nth-child(3) .value-icon { background: #fbf3de; color: #9b6f20; }
 .value-grid h3 { margin: 0 0 11px; font-family: Manrope, sans-serif; font-size: 24px; }
