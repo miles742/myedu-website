@@ -1,36 +1,38 @@
 {
-  "cleanUrls": false,
-  "trailingSlash": false,
-  "rewrites": [
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "routes": [
     {
-      "source": "/",
-      "has": [{ "type": "host", "value": "l2kedu.cloud" }],
-      "destination": "/l2k-edu/index.html"
+      "src": "/(.*)",
+      "headers": {
+        "X-Content-Type-Options": "nosniff",
+        "Referrer-Policy": "strict-origin-when-cross-origin",
+        "X-Frame-Options": "DENY"
+      },
+      "continue": true
     },
     {
-      "source": "/:path*",
-      "has": [{ "type": "host", "value": "l2kedu.cloud" }],
-      "destination": "/l2k-edu/:path*"
+      "src": "^/$",
+      "has": [
+        {
+          "type": "host",
+          "value": {
+            "inc": ["l2kedu.cloud", "www.l2kedu.cloud"]
+          }
+        }
+      ],
+      "dest": "/l2k-edu/index.html"
     },
     {
-      "source": "/",
-      "has": [{ "type": "host", "value": "www.l2kedu.cloud" }],
-      "destination": "/l2k-edu/index.html"
-    },
-    {
-      "source": "/:path*",
-      "has": [{ "type": "host", "value": "www.l2kedu.cloud" }],
-      "destination": "/l2k-edu/:path*"
-    }
-  ],
-  "headers": [
-    {
-      "source": "/(.*)",
-      "headers": [
-        { "key": "X-Content-Type-Options", "value": "nosniff" },
-        { "key": "Referrer-Policy", "value": "strict-origin-when-cross-origin" },
-        { "key": "X-Frame-Options", "value": "DENY" }
-      ]
+      "src": "^/(.*)$",
+      "has": [
+        {
+          "type": "host",
+          "value": {
+            "inc": ["l2kedu.cloud", "www.l2kedu.cloud"]
+          }
+        }
+      ],
+      "dest": "/l2k-edu/$1"
     }
   ]
 }
