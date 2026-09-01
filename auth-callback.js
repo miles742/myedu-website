@@ -6,8 +6,10 @@ const resultMessage = document.getElementById("auth-result-message");
 const resultLink = document.getElementById("auth-result-link");
 const passwordUpdateForm = document.getElementById("password-update-form");
 const passwordUpdateStatus = document.getElementById("password-update-status");
-const authReturnTarget = new URLSearchParams(window.location.search).get("return") === "l2k"
-    ? "l2k-edu/index.html"
+const isL2kReturn = new URLSearchParams(window.location.search).get("return") === "l2k";
+const isL2kHost = ["l2kedu.cloud", "www.l2kedu.cloud"].includes(window.location.hostname.toLowerCase().replace(/\.$/, ""));
+const authReturnTarget = isL2kReturn
+    ? (isL2kHost ? "/" : "l2k-edu/index.html")
     : "index.html";
 
 function readAuthError() {
@@ -103,7 +105,9 @@ async function completeAuthentication() {
         showResult(
             "success",
             isEmailChange ? "이메일 변경이 완료되었습니다." : "회원가입이 완료되었습니다.",
-            isEmailChange ? "변경된 이메일 주소를 마이페이지에서 확인할 수 있습니다." : "마이에듀케이션에 오신 것을 환영합니다.",
+            isEmailChange
+                ? "변경된 이메일 주소를 마이페이지에서 확인할 수 있습니다."
+                : (isL2kReturn ? "L2K EDU에 오신 것을 환영합니다." : "마이에듀케이션에 오신 것을 환영합니다."),
             isEmailChange ? "mypage.html" : authReturnTarget,
             isEmailChange ? "마이페이지로 이동" : "홈으로 이동"
         );

@@ -4,6 +4,10 @@ project_id = "rmhbnquzuerwaysinqfw"
 site_url = "https://myedu-website.vercel.app"
 additional_redirect_urls = [
     "https://myedu-website.vercel.app/auth-callback.html",
+    "https://myeducation.kr/auth-callback.html",
+    "https://www.myeducation.kr/auth-callback.html",
+    "https://l2kedu.cloud/auth-callback.html",
+    "https://www.l2kedu.cloud/auth-callback.html",
     "http://localhost:8000/auth-callback.html"
 ]
 

@@ -23,7 +23,7 @@
       "dest": "/l2k-edu/index.html"
     },
     {
-      "src": "^/(.*)$",
+      "src": "^/(?!auth-callback\\.(?:html|css|js)$|supabase-client\\.js$)(.*)$",
       "has": [
         {
           "type": "host",

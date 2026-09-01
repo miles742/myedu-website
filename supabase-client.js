@@ -3,6 +3,7 @@
 
     const supabaseUrl = "https://rmhbnquzuerwaysinqfw.supabase.co";
     const supabasePublishableKey = "sb_publishable_Mq2P8YU-JlVe6N2m5IzvJg_YJa9oBUP";
+    const l2kHosts = new Set(["l2kedu.cloud", "www.l2kedu.cloud"]);
 
     if (!window.supabase?.createClient) {
         console.error("Supabase 라이브러리를 불러오지 못했습니다.");
@@ -17,10 +18,15 @@
         }
     });
 
+    function getSignupSource() {
+        const hostname = window.location.hostname.toLowerCase().replace(/\.$/, "");
+        return l2kHosts.has(hostname) ? "l2k" : "myeducation";
+    }
+
     function getAuthCallbackUrl(flow) {
         const callbackUrl = new URL("/auth-callback.html", window.location.href);
         callbackUrl.searchParams.set("flow", flow);
-        if (window.location.pathname.toLowerCase().includes("/l2k-edu/")) {
+        if (getSignupSource() === "l2k") {
             callbackUrl.searchParams.set("return", "l2k");
         }
         return callbackUrl.href;
@@ -60,9 +66,7 @@
     }
 
     async function signUp(name, email, password, phone = "") {
-        const signupSource = window.location.pathname.toLowerCase().includes("/l2k-edu/")
-            ? "l2k"
-            : "myeducation";
+        const signupSource = getSignupSource();
         const { data, error } = await client.auth.signUp({
             email,
             password,

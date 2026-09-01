@@ -27,7 +27,8 @@ Supabase Dashboard의 **SQL Editor**에서 `supabase/schema.sql` 전체를 실�
 Supabase Dashboard의 **Edge Functions > Secrets**에서 다음 값을 등록합니다.
 
 - `RESEND_API_KEY`: Resend에서 발급한 API Key
-- `RESEND_FROM_EMAIL`: Resend에서 인증된 발신 주소
+- `RESEND_FROM_EMAIL`: 기존 마이에듀용으로 Resend에서 인증된 발신 주소
+- `L2K_RESEND_FROM_EMAIL`(선택): L2K EDU용으로 별도 인증한 발신 주소. 없으면 `RESEND_FROM_EMAIL`을 사용하되 표시 이름은 `L2K EDU`로 발송됩니다.
 - `WELCOME_WEBHOOK_SECRET`: 직접 생성한 충분히 긴 임의 문자열
 
 CLI를 사용한다면 다음과 같이 등록할 수 있습니다.
@@ -69,9 +70,10 @@ Edge Function은 다음 발신자 형식을 사용합니다.
 
 ```text
 마이에듀 <RESEND_FROM_EMAIL>
+L2K EDU <L2K_RESEND_FROM_EMAIL 또는 RESEND_FROM_EMAIL>
 ```
 
-메일 제목은 `[마이에듀] 회원가입을 환영합니다!`이며 HTML 본문과 일반 텍스트 본문을 함께 전송합니다.
+마이에듀 메일 제목은 `[마이에듀] 회원가입을 환영합니다!`이며 기존 HTML 본문과 일반 텍스트 본문을 그대로 전송합니다. L2K EDU 메일 제목은 `L2K EDU에 오신 것을 환영합니다`이며 L2K EDU 전용 로고와 본문을 전송합니다.
 
 ## 7. 최종 테스트
 
