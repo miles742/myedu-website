@@ -1,6 +1,28 @@
 {
   "cleanUrls": false,
   "trailingSlash": false,
+  "rewrites": [
+    {
+      "source": "/",
+      "has": [{ "type": "host", "value": "l2kedu.cloud" }],
+      "destination": "/l2k-edu/index.html"
+    },
+    {
+      "source": "/:path*",
+      "has": [{ "type": "host", "value": "l2kedu.cloud" }],
+      "destination": "/l2k-edu/:path*"
+    },
+    {
+      "source": "/",
+      "has": [{ "type": "host", "value": "www.l2kedu.cloud" }],
+      "destination": "/l2k-edu/index.html"
+    },
+    {
+      "source": "/:path*",
+      "has": [{ "type": "host", "value": "www.l2kedu.cloud" }],
+      "destination": "/l2k-edu/:path*"
+    }
+  ],
   "headers": [
     {
       "source": "/(.*)",
