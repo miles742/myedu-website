@@ -27,9 +27,6 @@ const businessCloseButtons = [...document.querySelectorAll("[data-business-close
 const businessInquiryButton = document.querySelector("[data-business-inquiry]");
 let businessLastFocused = null;
 let businessCloseTimer = null;
-const backgroundMusic = document.getElementById("background-music");
-const soundToggle = document.getElementById("sound-toggle");
-const soundLabel = soundToggle?.querySelector(".sound-label");
 const pageScrollProgress = document.getElementById("page-scroll-progress");
 const portfolioCategoryTabs = [...document.querySelectorAll("[data-portfolio-category]")];
 const portfolioCategoryPanels = [...document.querySelectorAll("[data-portfolio-panel]")];
@@ -42,7 +39,6 @@ const historyModal = document.getElementById("history-modal");
 const historyCloseButtons = [...document.querySelectorAll("[data-history-close]")];
 let historyLastFocused = null;
 let historyCloseTimer = null;
-let backgroundAutoplayPending = false;
 
 function openHistoryModal(selectedYear, selectedTab) {
     if (!historyModal) return;
@@ -342,66 +338,6 @@ floatingInquiry?.addEventListener("pointerenter", () => { inquiryPointerLocked =
 floatingInquiry?.addEventListener("pointerleave", () => { inquiryPointerLocked = false; });
 window.addEventListener("resize", () => {
     if (!canFollowPointer()) floatingInquiry?.classList.remove("is-cursor-following");
-});
-
-if (backgroundMusic) backgroundMusic.volume = 0.2;
-
-function updateSoundButton(isPlaying) {
-    if (!soundToggle) return;
-    soundToggle.classList.toggle("is-playing", isPlaying);
-    soundToggle.setAttribute("aria-pressed", String(isPlaying));
-    soundToggle.setAttribute("aria-label", isPlaying ? "배경음악 정지" : "배경음악 재생");
-    if (soundLabel) soundLabel.textContent = isPlaying ? "SOUND OFF" : "SOUND ON";
-}
-
-async function startBackgroundMusic() {
-    if (!backgroundMusic) return false;
-
-    try {
-        await backgroundMusic.play();
-        backgroundAutoplayPending = false;
-        updateSoundButton(true);
-        return true;
-    } catch (error) {
-        backgroundAutoplayPending = true;
-        updateSoundButton(false);
-        return false;
-    }
-}
-
-function stopBackgroundMusic() {
-    if (!backgroundMusic) return;
-    backgroundAutoplayPending = false;
-    backgroundMusic.pause();
-    backgroundMusic.currentTime = 0;
-    updateSoundButton(false);
-}
-
-window.addEventListener("load", startBackgroundMusic, { once: true });
-window.addEventListener("pageshow", () => {
-    if (backgroundMusic?.paused) startBackgroundMusic();
-});
-
-async function resumeAutoplayAfterInteraction(event) {
-    if (!backgroundAutoplayPending || event.target.closest?.("#sound-toggle")) return;
-    const started = await startBackgroundMusic();
-    if (started) {
-        document.removeEventListener("pointerdown", resumeAutoplayAfterInteraction, true);
-        document.removeEventListener("keydown", resumeAutoplayAfterInteraction, true);
-    }
-}
-
-document.addEventListener("pointerdown", resumeAutoplayAfterInteraction, true);
-document.addEventListener("keydown", resumeAutoplayAfterInteraction, true);
-
-soundToggle?.addEventListener("click", async () => {
-    if (!backgroundMusic) return;
-
-    if (backgroundMusic.paused) {
-        await startBackgroundMusic();
-    } else {
-        stopBackgroundMusic();
-    }
 });
 
 const businessDetails = {
@@ -875,10 +811,6 @@ programModal?.addEventListener("keydown", (event) => {
 
 function goBusiness() {
     document.getElementById("business")?.scrollIntoView({ behavior: "smooth" });
-}
-
-function contactUs() {
-    openInquiryModal();
 }
 
 function openInquiryModal() {
