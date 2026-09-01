@@ -21,3 +21,6 @@ verify_enabled = true
 
 [functions.send-welcome-email]
 verify_jwt = false
+
+[functions.delete-account]
+verify_jwt = true

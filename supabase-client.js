@@ -109,17 +109,20 @@
     }
 
     async function deleteAccount(password) {
-        const { data: currentData, error: currentError } = await client.auth.getUser();
-        if (currentError || !currentData.user?.email) throw friendlyError(currentError, "로그인 정보를 확인하지 못했습니다.");
-
-        const verification = await client.auth.signInWithPassword({
-            email: currentData.user.email,
-            password: String(password || "")
+        const { data, error } = await client.functions.invoke("delete-account", {
+            body: { password: String(password || "") }
         });
-        if (verification.error) throw friendlyError(verification.error, "비밀번호를 확인하지 못했습니다.");
-
-        const { error } = await client.rpc("delete_current_user");
-        if (error) throw friendlyError(error, "회원 탈퇴를 완료하지 못했습니다.");
+        if (error) {
+            let message = "회원 탈퇴를 완료하지 못했습니다.";
+            try {
+                const responseBody = await error.context?.json();
+                if (responseBody?.error) message = String(responseBody.error);
+            } catch (_) {
+                // Edge Function의 응답 본문을 읽을 수 없는 경우 기본 문구를 사용합니다.
+            }
+            throw new Error(message);
+        }
+        if (!data?.deleted) throw new Error("회원 탈퇴를 완료하지 못했습니다.");
         await client.auth.signOut({ scope: "local" });
     }
 

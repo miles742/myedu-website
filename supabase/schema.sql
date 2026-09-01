@@ -193,27 +193,3 @@ $$;
 
 revoke all on function public.find_member_email(text, text) from public;
 grant execute on function public.find_member_email(text, text) to anon, authenticated;
-
--- 로그인한 회원이 본인 계정만 직접 탈퇴할 수 있습니다.
-create or replace function public.delete_current_user()
-returns void
-language plpgsql
-security definer
-set search_path = ''
-as $$
-declare
-    current_user_id uuid := auth.uid();
-begin
-    if current_user_id is null then
-        raise exception '로그인이 필요합니다.';
-    end if;
-
-    delete from storage.objects
-     where bucket_id = 'avatars'
-       and (storage.foldername(name))[1] = current_user_id::text;
-    delete from auth.users where id = current_user_id;
-end;
-$$;
-
-revoke all on function public.delete_current_user() from public, anon;
-grant execute on function public.delete_current_user() to authenticated;
